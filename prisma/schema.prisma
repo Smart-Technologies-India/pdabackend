@@ -1,0 +1,364 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  NONE
+  ACTIVE
+  INACTIVE
+}
+
+enum Role {
+  NONE
+  SYSTEM
+  ADMIN
+  COLLECTOR
+  DYCOLLECTOR
+  ATP
+  JTP
+  MAMLATDAR
+  FIRE
+  LANDSUPTD
+  JE
+  SITESUPERVISOR
+  ARCHITECTASST
+  PLANNINGDRAUGHTSMAN
+  ARCHDRAUGHTSMANSP
+  ARCHDRAUGHTSMANST
+  USER
+}
+
+enum Department {
+  NONE
+  PDA
+  EOCS
+  LAND
+  MAMLATDAR
+  COLLECTOR
+  DYCOLLECTOR
+  FIRE
+  COASTGUARD
+}
+
+enum QueryType {
+  NONE
+  INTRA
+  INTER
+  PUBLIC
+}
+
+enum QueryStatus {
+  NONE
+  SENT
+  RECEIVED
+  REPLIED
+  RESOLVED
+}
+
+enum FormType {
+  NONE
+  PETROLEUM
+  RTI
+  ZONE
+  DEMOLITION
+  OLDCOPY
+  LANDRECORDS
+  MAMLATDAR
+}
+
+enum Agree {
+  NONE
+  YES
+  NO
+}
+
+enum NocType {
+  NONE
+  NOCTYPEONE
+  NOCTYPETWO
+  NOCTYPETHREE
+}
+
+enum ClassType {
+  NONE
+  CLASSTYPEONE
+  CLASSTYPETWO
+  CLASSTYPETHREE
+}
+
+enum OutletType {
+  NONE
+  OUTLETTYPEONE
+  OUTLETTYPETWO
+  OUTLETTYPETHREE
+}
+
+enum TypeOfInfo {
+  NONE
+  CP
+  OC
+  MAPS
+}
+
+enum queryStatus {
+  NONE
+  SUBMIT
+  INPROCESS
+  QUERYRAISED
+  APPROVED
+  REJCTED
+  CERTIFICATEGRANT
+}
+
+model user {
+  id                Int                 @id @default(autoincrement())
+  design_point_id   Int?
+  name              String?
+  email             String?
+  password          String
+  contact           String?
+  pic_url           String?
+  access_kay        String?
+  department        Department          @default(NONE)
+  role              Role                @default(NONE)
+  status            Status              @default(NONE)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+  to_user           query[]             @relation("touser")
+  from_user         query[]             @relation("fromuser")
+  common            common[]
+  rti_form          rti_form[]
+  zone_inof_form    zone_info_form[]
+  petroleum_form    petroleum_form[]
+  old_copy_form     old_copy_form[]
+  land_section_form land_section_form[]
+}
+
+model village {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  zone_inof_form    zone_info_form[]
+  petroleum_form    petroleum_form[]
+  old_copy_form     old_copy_form[]
+  land_section_form land_section_form[]
+}
+
+model query {
+  id           Int         @id @default(autoincrement())
+  stage        FormType    @default(NONE)
+  form_id      Int
+  form_status  Int
+  to_user      user        @relation("touser", fields: [to_user_id], references: [id])
+  to_user_id   Int
+  from_user    user        @relation("fromuser", fields: [from_user_id], references: [id])
+  from_user_id Int
+  query_type   QueryType   @default(NONE)
+  doc_url      String?
+  remark       String
+  query_status QueryStatus @default(NONE)
+  status       Status      @default(NONE)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  deletedAt    DateTime?
+}
+
+model common {
+  id            Int         @id @default(autoincrement())
+  form_type     FormType    @default(NONE)
+  form_id       Int
+  user          user        @relation(fields: [user_id], references: [id])
+  user_id       Int
+  auth_user_id  String?
+  focal_user_id String?
+  intra_user_id String?
+  inter_user_id String?
+  village       String?
+  name          String
+  number        String
+  form_status   Int?
+  query_status  queryStatus @default(NONE)
+  status        Status      @default(NONE)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  deletedAt     DateTime?
+}
+
+model rti_form {
+  id                  Int       @id @default(autoincrement())
+  user                user      @relation(fields: [userId], references: [id])
+  userId              Int
+  user_uid            String?
+  name                String?
+  address             String?
+  mobile              String?
+  email               String?
+  subject_info        String?
+  from_date           DateTime?
+  to_date             DateTime?
+  description         String?
+  information         String?
+  proverty_line_url   String?
+  iagree              Agree     @default(NONE)
+  remarks             String?
+  signature_url       String?
+  attachments         Json?
+  form_status         Int?
+  rejection_reason    String?
+  certificate_id      String?
+  certificate_date    DateTime?
+  certificate_url     String?
+  comments_dept       String?
+  condition_to_follow String?
+  status              Status    @default(NONE)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
+}
+
+model zone_info_form {
+  id                  Int       @id @default(autoincrement())
+  user                user      @relation(fields: [userId], references: [id])
+  userId              Int
+  user_uid            String?
+  name                String?
+  address             String?
+  mobile              String?
+  email               String?
+  survey_no           Int?
+  village             village?  @relation(fields: [village_id], references: [id])
+  village_id          Int?
+  nakel_url_1_14      String?
+  iagree              Agree     @default(NONE)
+  remarks             String?
+  signature_url       String?
+  attachments         Json?
+  form_status         Int?
+  rejection_reason    String?
+  certificate_id      String?
+  certificate_date    DateTime?
+  certificate_url     String?
+  comments_dept       String?
+  condition_to_follow String?
+  status              Status    @default(NONE)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
+}
+
+model petroleum_form {
+  id                  Int        @id @default(autoincrement())
+  user                user       @relation(fields: [userId], references: [id])
+  userId              Int
+  user_uid            String?
+  name                String?
+  address             String?
+  mobile              String?
+  email               String?
+  company_name        String?
+  company_region      String?
+  designation         String?
+  location_address    String?
+  noc_type            NocType    @default(NONE)
+  class_type          ClassType  @default(NONE)
+  outlet_type         OutletType @default(NONE)
+  capacity            Int?
+  survey_no           String?
+  village             village?   @relation(fields: [village_id], references: [id])
+  village_id          Int?
+  noc_fire_url        String?
+  na_order_url        String?
+  sanad_url           String?
+  coastguard_url      String?
+  plan_url            String?
+  explosive_url       String?
+  iagree              Agree      @default(NONE)
+  remarks             String?
+  signature_url       String?
+  attachments         Json?
+  form_status         Int?
+  rejection_reason    String?
+  certificate_id      String?
+  certificate_date    DateTime?
+  certificate_url     String?
+  comments_dept       String?
+  condition_to_follow String?
+  status              Status     @default(NONE)
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+  deletedAt           DateTime?
+}
+
+model old_copy_form {
+  id                      Int        @id @default(autoincrement())
+  user                    user       @relation(fields: [userId], references: [id])
+  userId                  Int
+  user_uid                String?
+  name                    String?
+  address                 String?
+  mobile                  String?
+  email                   String?
+  survey_no               String?
+  village                 village?   @relation(fields: [village_id], references: [id])
+  village_id              Int?
+  prev_application_date   DateTime?
+  prev_application_number String?
+  information_needed      String?
+  type_of_information     TypeOfInfo @default(NONE)
+  iagree                  Agree      @default(NONE)
+  remarks                 String?
+  aadhar_url              String?
+  signature_url           String?
+  attachments             Json?
+  form_status             Int?
+  rejection_reason        String?
+  certificate_id          String?
+  certificate_date        DateTime?
+  certificate_url         String?
+  comments_dept           String?
+  condition_to_follow     String?
+  status                  Status     @default(NONE)
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @updatedAt
+  deletedAt               DateTime?
+}
+
+model land_section_form {
+  id                         Int       @id @default(autoincrement())
+  user_id                    Int?
+  name                       String?
+  address                    String?
+  mobile                     String?
+  email                      String?
+  survey_no                  String?
+  village                    village?  @relation(fields: [village_id], references: [id])
+  village_id                 Int?
+  area                       String?
+  na_type                    String?
+  zone                       String?
+  road_access                String?
+  no_road_access             String?
+  width_adequate             String?
+  is_dimension_plot_adequate String?
+  is_crz                     String?
+  is_monument                String?
+  other_remark               String?
+  atp_recommendation         String?
+  attachments                Json?
+  comments_dept              String?
+  condition_to_follow        String?
+  status                     Status    @default(NONE)
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+  deletedAt                  DateTime?
+  user                       user?     @relation(fields: [userId], references: [id])
+  userId                     Int?
+}

@@ -1,0 +1,255 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Rti {
+  id: Int!
+  userId: Int!
+  user_uid: String!
+  name: String!
+  email: String!
+  address: String!
+  mobile: Float!
+  subject_info: String!
+  from_date: DateTime!
+  to_date: DateTime!
+  description: String!
+  information: String!
+  proverty_line_url: String!
+  iagree: Agree!
+  remarks: String!
+  signature_url: String!
+  attachments: String!
+  form_status: Status!
+  rejection_reason: String!
+  certificate_id: Status!
+  certificate_date: DateTime!
+  certificate_url: String!
+  comments_dept: String!
+  condition_to_follow: String!
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+enum Agree {
+  NONE
+  YES
+  NO
+}
+
+enum Status {
+  NONE
+  ACTIVE
+  INACTIVE
+}
+
+type User {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Petroleum {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Zoneinfo {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Oldcopy {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Auth {
+  token: String!
+  id: Int!
+  design_point_id: Int
+  name: String
+  email: String
+  password: String!
+  contact: String
+  pic_url: String
+  access_key: String
+  role: Role!
+  department: Department!
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum Role {
+  NONE
+  SYSTEM
+  ADMIN
+  COLLECTOR
+  DYCOLLECTOR
+  ATP
+  JTP
+  MAMLATDAR
+  FIRE
+  LANDSUPTD
+  JE
+  SITESUPERVISOR
+  ARCHITECTASST
+  PLANNINGDRAUGHTSMAN
+  ARCHDRAUGHTSMANSP
+  ARCHDRAUGHTSMANST
+  USER
+}
+
+enum Department {
+  NONE
+  PDA
+  EOCS
+  LAND
+  MAMLATDAR
+  COLLECTOR
+  DYCOLLECTOR
+  FIRE
+  COASTGUARD
+}
+
+type Query {
+  getAllRti: [Rti!]!
+  getAllRtiById(id: Int!): Rti!
+  user(id: Int!): User!
+  petroleum(id: Int!): Petroleum!
+  zoneinfo(id: Int!): Zoneinfo!
+  oldcopy(id: Int!): Oldcopy!
+  signin(loginUserInput: LoginUserInput!): Auth!
+}
+
+input LoginUserInput {
+  contact: String!
+  password: String!
+}
+
+type Mutation {
+  createRti(createRtiInput: CreateRtiInput!): Rti!
+  updateRtiById(updateRtiInput: UpdateRtiInput!): Rti!
+  deleteRtiById(updateRtiInput: UpdateRtiInput!): Rti!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createPetroleum(createPetroleumInput: CreatePetroleumInput!): Petroleum!
+  updatePetroleum(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
+  removePetroleum(id: Int!): Petroleum!
+  createZoneinfo(createZoneinfoInput: CreateZoneinfoInput!): Zoneinfo!
+  updateZoneinfo(updateZoneinfoInput: UpdateZoneinfoInput!): Zoneinfo!
+  removeZoneinfo(id: Int!): Zoneinfo!
+  createOldcopy(createOldcopyInput: CreateOldcopyInput!): Oldcopy!
+  updateOldcopy(updateOldcopyInput: UpdateOldcopyInput!): Oldcopy!
+  removeOldcopy(id: Int!): Oldcopy!
+  signup(signUpUserInput: SignUpUserInput!): Auth!
+}
+
+input CreateRtiInput {
+  userId: Int!
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  user_uid: String
+  subject_info: String!
+  from_date: DateTime
+  to_date: DateTime
+  description: String!
+  information: String
+  proverty_line_url: String
+  iagree: Agree
+  signature_url: String
+  remarks: String
+  attachments: String
+  form_status: Int!
+  status: Status
+}
+
+input UpdateRtiInput {
+  userId: Int
+  name: String
+  address: String
+  mobile: String
+  email: String
+  user_uid: String
+  subject_info: String
+  from_date: DateTime
+  to_date: DateTime
+  description: String
+  information: String
+  proverty_line_url: String
+  iagree: Agree
+  signature_url: String
+  remarks: String
+  attachments: String
+  form_status: Int
+  status: Status
+  id: Int!
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  deletedAt: DateTime
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreatePetroleumInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdatePetroleumInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateZoneinfoInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateZoneinfoInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateOldcopyInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateOldcopyInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input SignUpUserInput {
+  name: String!
+  contact: String!
+  password: String!
+}
