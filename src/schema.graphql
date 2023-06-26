@@ -120,6 +120,47 @@ enum Department {
   COASTGUARD
 }
 
+type Common {
+  id: Int!
+  form_id: Int!
+  user_id: Int!
+  auth_user_id: String
+  focal_user_id: String
+  intra_user_id: String
+  inter_user_id: String
+  village: String!
+  name: String!
+  number: String!
+  form_status: Int!
+  form_type: FormType!
+  query_status: queryStatus!
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+}
+
+enum FormType {
+  NONE
+  PETROLEUM
+  RTI
+  ZONE
+  DEMOLITION
+  OLDCOPY
+  LANDRECORDS
+  MAMLATDAR
+}
+
+enum queryStatus {
+  NONE
+  SUBMIT
+  INPROCESS
+  QUERYRAISED
+  APPROVED
+  REJCTED
+  CERTIFICATEGRANT
+}
+
 type Query {
   getAllRti: [Rti!]!
   getAllRtiById(id: Int!): Rti!
@@ -128,11 +169,32 @@ type Query {
   zoneinfo(id: Int!): Zoneinfo!
   oldcopy(id: Int!): Oldcopy!
   signin(loginUserInput: LoginUserInput!): Auth!
+  getAllCommon: [Common!]!
+  getAllCommonById(id: Int!): Common!
+  searchCommon(searchCommonInput: SearchCommonInput!): [Common!]!
 }
 
 input LoginUserInput {
   contact: String!
   password: String!
+}
+
+input SearchCommonInput {
+  form_id: Int
+  user_id: Int
+  auth_user_id: String
+  focal_user_id: String
+  intra_user_id: String
+  inter_user_id: String
+  village: String
+  name: String
+  number: String
+  form_status: Int
+  form_type: FormType
+  query_status: queryStatus
+  status: Status
+  id: Int
+  deletedAt: DateTime
 }
 
 type Mutation {
@@ -152,6 +214,9 @@ type Mutation {
   updateOldcopy(updateOldcopyInput: UpdateOldcopyInput!): Oldcopy!
   removeOldcopy(id: Int!): Oldcopy!
   signup(signUpUserInput: SignUpUserInput!): Auth!
+  createCommon(createCommonInput: CreateCommonInput!): Common!
+  updateCommonById(updateCommonInput: UpdateCommonInput!): Common!
+  deleteCommonById(updateCommonInput: UpdateCommonInput!): Common!
 }
 
 input CreateRtiInput {
@@ -252,4 +317,38 @@ input SignUpUserInput {
   name: String!
   contact: String!
   password: String!
+}
+
+input CreateCommonInput {
+  form_id: Int!
+  user_id: Int!
+  auth_user_id: String!
+  focal_user_id: String!
+  intra_user_id: String!
+  inter_user_id: String!
+  village: String!
+  name: String!
+  number: String!
+  form_status: Int!
+  form_type: FormType
+  query_status: queryStatus
+  status: Status
+}
+
+input UpdateCommonInput {
+  form_id: Int
+  user_id: Int
+  auth_user_id: String
+  focal_user_id: String
+  intra_user_id: String
+  inter_user_id: String
+  village: String
+  name: String
+  number: String
+  form_status: Int
+  form_type: FormType
+  query_status: queryStatus
+  status: Status
+  id: Int
+  deletedAt: DateTime
 }

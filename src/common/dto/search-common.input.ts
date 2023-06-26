@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsOptional } from 'class-validator';
 import { CreateCommonInput } from './create-common.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 import { FormType, Status, queryStatus } from '@prisma/client';
 
 @InputType()
-export class UpdateCommonInput extends PartialType(CreateCommonInput) {
-  @IsNotEmpty()
+export class SearchCommonInput extends PartialType(CreateCommonInput) {
+  @IsOptional()
   @Field(() => Int, { nullable: true })
   id: number;
 

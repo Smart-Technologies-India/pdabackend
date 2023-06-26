@@ -52,9 +52,48 @@ export enum Department {
     COASTGUARD = "COASTGUARD"
 }
 
+export enum FormType {
+    NONE = "NONE",
+    PETROLEUM = "PETROLEUM",
+    RTI = "RTI",
+    ZONE = "ZONE",
+    DEMOLITION = "DEMOLITION",
+    OLDCOPY = "OLDCOPY",
+    LANDRECORDS = "LANDRECORDS",
+    MAMLATDAR = "MAMLATDAR"
+}
+
+export enum queryStatus {
+    NONE = "NONE",
+    SUBMIT = "SUBMIT",
+    INPROCESS = "INPROCESS",
+    QUERYRAISED = "QUERYRAISED",
+    APPROVED = "APPROVED",
+    REJCTED = "REJCTED",
+    CERTIFICATEGRANT = "CERTIFICATEGRANT"
+}
+
 export interface LoginUserInput {
     contact: string;
     password: string;
+}
+
+export interface SearchCommonInput {
+    form_id?: Nullable<number>;
+    user_id?: Nullable<number>;
+    auth_user_id?: Nullable<string>;
+    focal_user_id?: Nullable<string>;
+    intra_user_id?: Nullable<string>;
+    inter_user_id?: Nullable<string>;
+    village?: Nullable<string>;
+    name?: Nullable<string>;
+    number?: Nullable<string>;
+    form_status?: Nullable<number>;
+    form_type?: Nullable<FormType>;
+    query_status?: Nullable<queryStatus>;
+    status?: Nullable<Status>;
+    id?: Nullable<number>;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface CreateRtiInput {
@@ -149,6 +188,40 @@ export interface SignUpUserInput {
     password: string;
 }
 
+export interface CreateCommonInput {
+    form_id: number;
+    user_id: number;
+    auth_user_id: string;
+    focal_user_id: string;
+    intra_user_id: string;
+    inter_user_id: string;
+    village: string;
+    name: string;
+    number: string;
+    form_status: number;
+    form_type?: Nullable<FormType>;
+    query_status?: Nullable<queryStatus>;
+    status?: Nullable<Status>;
+}
+
+export interface UpdateCommonInput {
+    form_id?: Nullable<number>;
+    user_id?: Nullable<number>;
+    auth_user_id?: Nullable<string>;
+    focal_user_id?: Nullable<string>;
+    intra_user_id?: Nullable<string>;
+    inter_user_id?: Nullable<string>;
+    village?: Nullable<string>;
+    name?: Nullable<string>;
+    number?: Nullable<string>;
+    form_status?: Nullable<number>;
+    form_type?: Nullable<FormType>;
+    query_status?: Nullable<queryStatus>;
+    status?: Nullable<Status>;
+    id?: Nullable<number>;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface Rti {
     id: number;
     userId: number;
@@ -214,6 +287,26 @@ export interface Auth {
     deletedAt?: Nullable<DateTime>;
 }
 
+export interface Common {
+    id: number;
+    form_id: number;
+    user_id: number;
+    auth_user_id?: Nullable<string>;
+    focal_user_id?: Nullable<string>;
+    intra_user_id?: Nullable<string>;
+    inter_user_id?: Nullable<string>;
+    village: string;
+    name: string;
+    number: string;
+    form_status: number;
+    form_type: FormType;
+    query_status: queryStatus;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt: DateTime;
+}
+
 export interface IQuery {
     getAllRti(): Rti[] | Promise<Rti[]>;
     getAllRtiById(id: number): Rti | Promise<Rti>;
@@ -222,6 +315,9 @@ export interface IQuery {
     zoneinfo(id: number): Zoneinfo | Promise<Zoneinfo>;
     oldcopy(id: number): Oldcopy | Promise<Oldcopy>;
     signin(loginUserInput: LoginUserInput): Auth | Promise<Auth>;
+    getAllCommon(): Common[] | Promise<Common[]>;
+    getAllCommonById(id: number): Common | Promise<Common>;
+    searchCommon(searchCommonInput: SearchCommonInput): Common[] | Promise<Common[]>;
 }
 
 export interface IMutation {
@@ -241,6 +337,9 @@ export interface IMutation {
     updateOldcopy(updateOldcopyInput: UpdateOldcopyInput): Oldcopy | Promise<Oldcopy>;
     removeOldcopy(id: number): Oldcopy | Promise<Oldcopy>;
     signup(signUpUserInput: SignUpUserInput): Auth | Promise<Auth>;
+    createCommon(createCommonInput: CreateCommonInput): Common | Promise<Common>;
+    updateCommonById(updateCommonInput: UpdateCommonInput): Common | Promise<Common>;
+    deleteCommonById(updateCommonInput: UpdateCommonInput): Common | Promise<Common>;
 }
 
 export type DateTime = any;

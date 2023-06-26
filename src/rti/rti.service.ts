@@ -62,7 +62,7 @@ export class RtiService {
     });
 
     if (!existingUser) {
-      throw new NotFoundException(`RTi with id ${rti.id} not found`);
+      throw new NotFoundException(`RTI with id ${rti.id} not found`);
     }
 
     const updatedrti = this.prisma.rti_form.update({
