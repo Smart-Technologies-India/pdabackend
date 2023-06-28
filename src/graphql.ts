@@ -144,6 +144,22 @@ export interface UpdateRtiInput {
     deletedAt?: Nullable<DateTime>;
 }
 
+export interface UpdateUserInput {
+    exampleField?: Nullable<number>;
+    id: number;
+    design_point_id?: Nullable<number>;
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    password?: Nullable<string>;
+    contact?: Nullable<string>;
+    pic_url?: Nullable<string>;
+    access_kay?: Nullable<string>;
+    role?: Nullable<Role>;
+    department?: Nullable<Department>;
+    status?: Nullable<Status>;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface CreatePetroleumInput {
     exampleField: number;
 }
@@ -304,7 +320,6 @@ export interface Rti {
 }
 
 export interface User {
-    token: string;
     id: number;
     design_point_id?: Nullable<number>;
     name?: Nullable<string>;
@@ -312,7 +327,7 @@ export interface User {
     password: string;
     contact?: Nullable<string>;
     pic_url?: Nullable<string>;
-    access_key?: Nullable<string>;
+    access_kay?: Nullable<string>;
     role: Role;
     department: Department;
     status: Status;
@@ -342,7 +357,7 @@ export interface Auth {
     password: string;
     contact?: Nullable<string>;
     pic_url?: Nullable<string>;
-    access_key?: Nullable<string>;
+    access_kay?: Nullable<string>;
     role: Role;
     department: Department;
     status: Status;
@@ -408,6 +423,7 @@ export interface IQuery {
     getAllRti(): Rti[] | Promise<Rti[]>;
     getAllRtiById(id: number): Rti | Promise<Rti>;
     getUserById(id: number): User | Promise<User>;
+    getUserDPById(id: number): User | Promise<User>;
     petroleum(id: number): Petroleum | Promise<Petroleum>;
     zoneinfo(id: number): Zoneinfo | Promise<Zoneinfo>;
     oldcopy(id: number): Oldcopy | Promise<Oldcopy>;
@@ -425,6 +441,7 @@ export interface IMutation {
     createRti(createRtiInput: CreateRtiInput): Rti | Promise<Rti>;
     updateRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
     deleteRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
+    updateUserDPById(updateUserInput: UpdateUserInput): number | Promise<number>;
     createPetroleum(createPetroleumInput: CreatePetroleumInput): Petroleum | Promise<Petroleum>;
     updatePetroleum(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;
     removePetroleum(id: number): Petroleum | Promise<Petroleum>;

@@ -68,7 +68,7 @@ export class AuthService {
 
   async loginwithid(id: number) {
     const user: user = await this.prisma.user.findFirst({
-      where: { id: id },
+      where: { design_point_id: id },
     });
     if (!user) throw new BadRequestException('User not exist with this id');
 

@@ -50,7 +50,6 @@ enum Status {
 }
 
 type User {
-  token: String!
   id: Int!
   design_point_id: Int
   name: String
@@ -58,7 +57,7 @@ type User {
   password: String!
   contact: String
   pic_url: String
-  access_key: String
+  access_kay: String
   role: Role!
   department: Department!
   status: Status!
@@ -123,7 +122,7 @@ type Auth {
   password: String!
   contact: String
   pic_url: String
-  access_key: String
+  access_kay: String
   role: Role!
   department: Department!
   status: Status!
@@ -210,6 +209,7 @@ type Query {
   getAllRti: [Rti!]!
   getAllRtiById(id: Int!): Rti!
   getUserById(id: Int!): User!
+  getUserDPById(id: Int!): User!
   petroleum(id: Int!): Petroleum!
   zoneinfo(id: Int!): Zoneinfo!
   oldcopy(id: Int!): Oldcopy!
@@ -250,6 +250,7 @@ type Mutation {
   createRti(createRtiInput: CreateRtiInput!): Rti!
   updateRtiById(updateRtiInput: UpdateRtiInput!): Rti!
   deleteRtiById(updateRtiInput: UpdateRtiInput!): Rti!
+  updateUserDPById(updateUserInput: UpdateUserInput!): Int!
   createPetroleum(createPetroleumInput: CreatePetroleumInput!): Petroleum!
   updatePetroleum(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
   removePetroleum(id: Int!): Petroleum!
@@ -314,6 +315,23 @@ input UpdateRtiInput {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  deletedAt: DateTime
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+  design_point_id: Int
+  name: String
+  email: String
+  password: String
+  contact: String
+  pic_url: String
+  access_kay: String
+  role: Role
+  department: Department
+  status: Status
   deletedAt: DateTime
 }
 

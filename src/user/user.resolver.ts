@@ -12,4 +12,14 @@ export class UserResolver {
   getUserById(@Args('id', { type: () => Int }) id: number) {
     return this.userService.getUserById(id);
   }
+
+  @Query(() => User)
+  getUserDPById(@Args('id', { type: () => Int }) id: number) {
+    return this.userService.getUserDPById(id);
+  }
+
+  @Mutation(() => Int)
+  updateUserDPById(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.userService.updateUserDPById(updateUserInput);
+  }
 }

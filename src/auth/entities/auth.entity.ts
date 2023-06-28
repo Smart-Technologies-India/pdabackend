@@ -42,7 +42,7 @@ export class Auth {
   pic_url: string;
 
   @Field(() => String, { nullable: true })
-  access_key: string;
+  access_kay: string;
 
   @Field(() => Role)
   role: Role;

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { PrismaService } from 'prisma/prisma.service';
@@ -13,5 +17,41 @@ export class UserService {
     });
     if (!user) throw new BadRequestException('No user exist with this id.');
     return user;
+  }
+
+  async getUserDPById(id: number) {
+    const user = await this.prisma.user.findFirst({
+      where: { design_point_id: id, deletedAt: null },
+    });
+    if (!user) throw new BadRequestException('No user exist with this id.');
+    return user;
+  }
+
+  async updateUserDPById(user: UpdateUserInput) {
+    const dataToUpdate: {
+      [key: string]: any;
+    } = {};
+
+    for (const [key, value] of Object.entries(user)) {
+      if (value) {
+        dataToUpdate[key] = value;
+      }
+    }
+
+    const existingUser = await this.prisma.user.findFirst({
+      where: { design_point_id: user.id },
+    });
+
+    if (!existingUser) {
+      throw new NotFoundException(`User with id ${user.id} not found`);
+    }
+
+    const updatedUser = await this.prisma.user.updateMany({
+      where: { design_point_id: user.id },
+      data: { access_kay: user.access_kay },
+    });
+    if (updatedUser.count == 0)
+      throw new BadRequestException('Unable to update user.');
+    return updatedUser.count;
   }
 }

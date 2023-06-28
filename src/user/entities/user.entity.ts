@@ -3,9 +3,6 @@ import { Department, Role, Status } from '@prisma/client';
 
 @ObjectType()
 export class User {
-  @Field(() => String)
-  token: string;
-
   @Field(() => Int)
   id: number;
 
@@ -28,7 +25,7 @@ export class User {
   pic_url: string;
 
   @Field(() => String, { nullable: true })
-  access_key: string;
+  access_kay: string;
 
   @Field(() => Role)
   role: Role;
