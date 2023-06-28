@@ -18,7 +18,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { join } from 'path';
 import { Request, Response } from 'express';
-
+import { CreateAuthDto } from './dto/auth-uploader.dto';
+import axios from 'axios';
 interface response {
   status: boolean;
   data: unknown;
@@ -29,6 +30,20 @@ interface response {
 @Controller('uploader')
 export class UploaderController {
   constructor(private readonly uploaderService: UploaderService) {}
+
+  @Post('login')
+  async login(@Body() dto: CreateAuthDto) {
+    const response = await axios.post(
+      'http://77.75.120.70:8073/Home/AuthenticateFromLandRecord?UserId=10121&AccessKey=DIDMSIX234M4L23939',
+      {
+        UserId: 10121,
+        AccessKey: 'DIDMSIX234M4L23939',
+      },
+    );
+
+    console.log(response.data);
+  }
+
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {

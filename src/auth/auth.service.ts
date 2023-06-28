@@ -66,6 +66,23 @@ export class AuthService {
     return { ...returnuser, token };
   }
 
+  async loginwithid(id: number) {
+    const user: user = await this.prisma.user.findFirst({
+      where: { id: id },
+    });
+    if (!user) throw new BadRequestException('User not exist with this id');
+
+    const token = await this.singToken({
+      id: user.id,
+      contact: Number(user.contact),
+      role: user.role,
+    });
+
+    let returnuser: any = user;
+    returnuser.contact = Number(user.contact);
+    return { ...returnuser, token };
+  }
+
   async hashPassword(password: string): Promise<string> {
     const saltOrRounds = 10;
     return await bcrypt.hash(password, saltOrRounds);

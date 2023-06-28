@@ -113,7 +113,6 @@ export interface CreateRtiInput {
     signature_url?: Nullable<string>;
     remarks?: Nullable<string>;
     attachments?: Nullable<string>;
-    form_status: number;
     status?: Nullable<Status>;
 }
 
@@ -134,7 +133,6 @@ export interface UpdateRtiInput {
     signature_url?: Nullable<string>;
     remarks?: Nullable<string>;
     attachments?: Nullable<string>;
-    form_status?: Nullable<number>;
     status?: Nullable<Status>;
     id: number;
     rejection_reason?: Nullable<string>;
@@ -144,15 +142,6 @@ export interface UpdateRtiInput {
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
     deletedAt?: Nullable<DateTime>;
-}
-
-export interface CreateUserInput {
-    exampleField: number;
-}
-
-export interface UpdateUserInput {
-    exampleField?: Nullable<number>;
-    id: number;
 }
 
 export interface CreatePetroleumInput {
@@ -222,6 +211,68 @@ export interface UpdateCommonInput {
     deletedAt?: Nullable<DateTime>;
 }
 
+export interface CreateLandsectionInput {
+    userId: number;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    area?: Nullable<string>;
+    na_type?: Nullable<string>;
+    zone?: Nullable<string>;
+    road_access?: Nullable<string>;
+    no_road_access?: Nullable<string>;
+    width_adequate?: Nullable<string>;
+    is_dimension_plot_adequate?: Nullable<string>;
+    is_crz?: Nullable<string>;
+    is_monument?: Nullable<string>;
+    other_remark?: Nullable<string>;
+    atp_recommendation?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    status?: Nullable<Status>;
+}
+
+export interface UpdateLandsectionInput {
+    userId?: Nullable<number>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    area?: Nullable<string>;
+    na_type?: Nullable<string>;
+    zone?: Nullable<string>;
+    road_access?: Nullable<string>;
+    no_road_access?: Nullable<string>;
+    width_adequate?: Nullable<string>;
+    is_dimension_plot_adequate?: Nullable<string>;
+    is_crz?: Nullable<string>;
+    is_monument?: Nullable<string>;
+    other_remark?: Nullable<string>;
+    atp_recommendation?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    status?: Nullable<Status>;
+    id?: Nullable<number>;
+    is_mounment?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface OutsideLandsectionInput {
+    form_id: number;
+    stage_id: number;
+    village_id: number;
+    name: string;
+    survey_no: string;
+    area: string;
+    purpose: string;
+    number: string;
+}
+
 export interface Rti {
     id: number;
     userId: number;
@@ -240,7 +291,6 @@ export interface Rti {
     remarks: string;
     signature_url: string;
     attachments: string;
-    form_status: Status;
     rejection_reason: string;
     certificate_id: Status;
     certificate_date: DateTime;
@@ -250,11 +300,25 @@ export interface Rti {
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
-    deletedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface User {
-    exampleField: number;
+    token: string;
+    id: number;
+    design_point_id?: Nullable<number>;
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    password: string;
+    contact?: Nullable<string>;
+    pic_url?: Nullable<string>;
+    access_key?: Nullable<string>;
+    role: Role;
+    department: Department;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface Petroleum {
@@ -307,26 +371,60 @@ export interface Common {
     deletedAt: DateTime;
 }
 
+export interface Landsection {
+    id?: Nullable<number>;
+    userId?: Nullable<number>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    area?: Nullable<string>;
+    na_type?: Nullable<string>;
+    zone?: Nullable<string>;
+    road_access?: Nullable<string>;
+    no_road_access?: Nullable<string>;
+    width_adequate?: Nullable<string>;
+    is_dimension_plot_adequate?: Nullable<string>;
+    is_crz?: Nullable<string>;
+    is_monument?: Nullable<string>;
+    other_remark?: Nullable<string>;
+    atp_recommendation?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface Village {
+    id: number;
+    name: string;
+}
+
 export interface IQuery {
     getAllRti(): Rti[] | Promise<Rti[]>;
     getAllRtiById(id: number): Rti | Promise<Rti>;
-    user(id: number): User | Promise<User>;
+    getUserById(id: number): User | Promise<User>;
     petroleum(id: number): Petroleum | Promise<Petroleum>;
     zoneinfo(id: number): Zoneinfo | Promise<Zoneinfo>;
     oldcopy(id: number): Oldcopy | Promise<Oldcopy>;
     signin(loginUserInput: LoginUserInput): Auth | Promise<Auth>;
+    loginwithid(id: number): Auth | Promise<Auth>;
     getAllCommon(): Common[] | Promise<Common[]>;
     getAllCommonById(id: number): Common | Promise<Common>;
     searchCommon(searchCommonInput: SearchCommonInput): Common[] | Promise<Common[]>;
+    getAllLand(): Landsection[] | Promise<Landsection[]>;
+    getAllLandById(id: number): Landsection | Promise<Landsection>;
+    getAllVillageById(id: number): Village | Promise<Village>;
 }
 
 export interface IMutation {
     createRti(createRtiInput: CreateRtiInput): Rti | Promise<Rti>;
     updateRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
     deleteRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
-    createUser(createUserInput: CreateUserInput): User | Promise<User>;
-    updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
-    removeUser(id: number): User | Promise<User>;
     createPetroleum(createPetroleumInput: CreatePetroleumInput): Petroleum | Promise<Petroleum>;
     updatePetroleum(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;
     removePetroleum(id: number): Petroleum | Promise<Petroleum>;
@@ -340,6 +438,10 @@ export interface IMutation {
     createCommon(createCommonInput: CreateCommonInput): Common | Promise<Common>;
     updateCommonById(updateCommonInput: UpdateCommonInput): Common | Promise<Common>;
     deleteCommonById(updateCommonInput: UpdateCommonInput): Common | Promise<Common>;
+    createLand(createLandsectionInput: CreateLandsectionInput): Landsection | Promise<Landsection>;
+    updateLandById(updateLandsectionInput: UpdateLandsectionInput): Landsection | Promise<Landsection>;
+    deleteLandById(updateLandsectionInput: UpdateLandsectionInput): Landsection | Promise<Landsection>;
+    getFromOutside(outsideLandsectionInput: OutsideLandsectionInput): Common | Promise<Common>;
 }
 
 export type DateTime = any;

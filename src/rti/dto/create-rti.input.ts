@@ -77,10 +77,6 @@ export class CreateRtiInput {
   attachments: string;
 
   @IsOptional()
-  @Field(() => Int)
-  form_status: number;
-
-  @IsOptional()
   @Field(() => Status, { nullable: true })
   status: Status;
 }

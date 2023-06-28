@@ -54,9 +54,6 @@ export class Rti {
   @Field(() => String)
   attachments: string;
 
-  @Field(() => Status)
-  form_status: Status;
-
   @Field(() => String)
   rejection_reason: string;
 
@@ -84,6 +81,6 @@ export class Rti {
   @Field(() => Date)
   updatedAt: Date;
 
-  @Field(() => Date)
+  @Field(() => Date, { nullable: true })
   deletedAt: Date;
 }

@@ -20,7 +20,6 @@ type Rti {
   remarks: String!
   signature_url: String!
   attachments: String!
-  form_status: Status!
   rejection_reason: String!
   certificate_id: Status!
   certificate_date: DateTime!
@@ -30,7 +29,7 @@ type Rti {
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
-  deletedAt: DateTime!
+  deletedAt: DateTime
 }
 
 """
@@ -51,26 +50,6 @@ enum Status {
 }
 
 type User {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Petroleum {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Zoneinfo {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Oldcopy {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-type Auth {
   token: String!
   id: Int!
   design_point_id: Int
@@ -120,6 +99,39 @@ enum Department {
   COASTGUARD
 }
 
+type Petroleum {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Zoneinfo {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Oldcopy {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Auth {
+  token: String!
+  id: Int!
+  design_point_id: Int
+  name: String
+  email: String
+  password: String!
+  contact: String
+  pic_url: String
+  access_key: String
+  role: Role!
+  department: Department!
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
 type Common {
   id: Int!
   form_id: Int!
@@ -161,17 +173,54 @@ enum queryStatus {
   CERTIFICATEGRANT
 }
 
+type Landsection {
+  id: Int
+  userId: Int
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  area: String
+  na_type: String
+  zone: String
+  road_access: String
+  no_road_access: String
+  width_adequate: String
+  is_dimension_plot_adequate: String
+  is_crz: String
+  is_monument: String
+  other_remark: String
+  atp_recommendation: String
+  comments_dept: String
+  condition_to_follow: String
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type Village {
+  id: Int!
+  name: String!
+}
+
 type Query {
   getAllRti: [Rti!]!
   getAllRtiById(id: Int!): Rti!
-  user(id: Int!): User!
+  getUserById(id: Int!): User!
   petroleum(id: Int!): Petroleum!
   zoneinfo(id: Int!): Zoneinfo!
   oldcopy(id: Int!): Oldcopy!
   signin(loginUserInput: LoginUserInput!): Auth!
+  loginwithid(id: Int!): Auth!
   getAllCommon: [Common!]!
   getAllCommonById(id: Int!): Common!
   searchCommon(searchCommonInput: SearchCommonInput!): [Common!]!
+  getAllLand: [Landsection!]!
+  getAllLandById(id: Int!): Landsection!
+  getAllVillageById(id: Int!): Village!
 }
 
 input LoginUserInput {
@@ -201,9 +250,6 @@ type Mutation {
   createRti(createRtiInput: CreateRtiInput!): Rti!
   updateRtiById(updateRtiInput: UpdateRtiInput!): Rti!
   deleteRtiById(updateRtiInput: UpdateRtiInput!): Rti!
-  createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
   createPetroleum(createPetroleumInput: CreatePetroleumInput!): Petroleum!
   updatePetroleum(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
   removePetroleum(id: Int!): Petroleum!
@@ -217,6 +263,10 @@ type Mutation {
   createCommon(createCommonInput: CreateCommonInput!): Common!
   updateCommonById(updateCommonInput: UpdateCommonInput!): Common!
   deleteCommonById(updateCommonInput: UpdateCommonInput!): Common!
+  createLand(createLandsectionInput: CreateLandsectionInput!): Landsection!
+  updateLandById(updateLandsectionInput: UpdateLandsectionInput!): Landsection!
+  deleteLandById(updateLandsectionInput: UpdateLandsectionInput!): Landsection!
+  getFromOutside(outsideLandsectionInput: OutsideLandsectionInput!): Common!
 }
 
 input CreateRtiInput {
@@ -236,7 +286,6 @@ input CreateRtiInput {
   signature_url: String
   remarks: String
   attachments: String
-  form_status: Int!
   status: Status
 }
 
@@ -257,7 +306,6 @@ input UpdateRtiInput {
   signature_url: String
   remarks: String
   attachments: String
-  form_status: Int
   status: Status
   id: Int!
   rejection_reason: String
@@ -267,17 +315,6 @@ input UpdateRtiInput {
   comments_dept: String
   condition_to_follow: String
   deletedAt: DateTime
-}
-
-input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
 
 input CreatePetroleumInput {
@@ -351,4 +388,66 @@ input UpdateCommonInput {
   status: Status
   id: Int
   deletedAt: DateTime
+}
+
+input CreateLandsectionInput {
+  userId: Int!
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  area: String
+  na_type: String
+  zone: String
+  road_access: String
+  no_road_access: String
+  width_adequate: String
+  is_dimension_plot_adequate: String
+  is_crz: String
+  is_monument: String
+  other_remark: String
+  atp_recommendation: String
+  comments_dept: String
+  condition_to_follow: String
+  status: Status
+}
+
+input UpdateLandsectionInput {
+  userId: Int
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  area: String
+  na_type: String
+  zone: String
+  road_access: String
+  no_road_access: String
+  width_adequate: String
+  is_dimension_plot_adequate: String
+  is_crz: String
+  is_monument: String
+  other_remark: String
+  atp_recommendation: String
+  comments_dept: String
+  condition_to_follow: String
+  status: Status
+  id: Int
+  is_mounment: String
+  deletedAt: DateTime
+}
+
+input OutsideLandsectionInput {
+  form_id: Int!
+  stage_id: Int!
+  village_id: Int!
+  name: String!
+  survey_no: String!
+  area: String!
+  purpose: String!
+  number: String!
 }

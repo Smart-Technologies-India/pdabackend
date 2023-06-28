@@ -26,4 +26,9 @@ export class AuthResolver {
       signUpUserInput.password,
     );
   }
+
+  @Query(() => Auth)
+  loginwithid(@Args('id', { type: () => Int }) id: number) {
+    return this.authService.loginwithid(id);
+  }
 }

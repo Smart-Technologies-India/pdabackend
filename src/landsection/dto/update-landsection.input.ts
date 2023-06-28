@@ -1,13 +1,19 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
-import { CreateRtiInput } from './create-rti.input';
+import { CreateLandsectionInput } from './create-landsection.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
-import { Agree, Status } from '@prisma/client';
+import { Status } from '@prisma/client';
 
 @InputType()
-export class UpdateRtiInput extends PartialType(CreateRtiInput) {
+export class UpdateLandsectionInput extends PartialType(
+  CreateLandsectionInput,
+) {
   @IsNotEmpty()
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   id: number;
+
+  @IsOptional()
+  @Field(() => Int, { nullable: true })
+  userId: number;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
@@ -27,63 +33,55 @@ export class UpdateRtiInput extends PartialType(CreateRtiInput) {
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  user_uid: string;
+  survey_no: string;
+
+  @IsOptional()
+  @Field(() => Int, { nullable: true })
+  village_id: number;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  subject_info: string;
-
-  @IsOptional()
-  @Field(() => Date, { nullable: true })
-  from_date: Date;
-
-  @IsOptional()
-  @Field(() => Date, { nullable: true })
-  to_date: Date;
+  area: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  description: string;
+  na_type: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  information: string;
+  zone: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  proverty_line_url: string;
-
-  @IsOptional()
-  @Field(() => Agree, { nullable: true })
-  iagree: Agree;
+  road_access: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  signature_url: string;
+  no_road_access: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  remarks: string;
+  width_adequate: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  attachments: string;
+  is_dimension_plot_adequate: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  rejection_reason: string;
+  is_crz: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  certificate_id: string;
-
-  @IsOptional()
-  @Field(() => Date, { nullable: true })
-  certificate_date: Date;
+  is_mounment: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })
-  certificate_url: string;
+  other_remark: string;
+
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  atp_recommendation: string;
 
   @IsOptional()
   @Field(() => String, { nullable: true })

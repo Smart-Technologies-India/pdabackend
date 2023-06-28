@@ -14,6 +14,8 @@ import { OldcopyModule } from './oldcopy/oldcopy.module';
 import { UploaderModule } from './uploader/uploader.module';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
+import { LandsectionModule } from './landsection/landsection.module';
+import { VillageModule } from './village/village.module';
 
 @Module({
   imports: [
@@ -38,6 +40,8 @@ import { CommonModule } from './common/common.module';
     UploaderModule,
     AuthModule,
     CommonModule,
+    LandsectionModule,
+    VillageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
