@@ -8,28 +8,34 @@ import { UpdateZoneinfoInput } from './dto/update-zoneinfo.input';
 export class ZoneinfoResolver {
   constructor(private readonly zoneinfoService: ZoneinfoService) {}
 
-  @Mutation(() => Zoneinfo)
-  createZoneinfo(@Args('createZoneinfoInput') createZoneinfoInput: CreateZoneinfoInput) {
-    return this.zoneinfoService.create(createZoneinfoInput);
+  @Query(() => [Zoneinfo])
+  getAllZone() {
+    return this.zoneinfoService.getAllZone();
   }
 
-  @Query(() => [Zoneinfo], { name: 'zoneinfo' })
-  findAll() {
-    return this.zoneinfoService.findAll();
-  }
-
-  @Query(() => Zoneinfo, { name: 'zoneinfo' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.zoneinfoService.findOne(id);
+  @Query(() => Zoneinfo)
+  getAllZoneById(@Args('id', { type: () => Int }) id: number) {
+    return this.zoneinfoService.getAllZoneById(id);
   }
 
   @Mutation(() => Zoneinfo)
-  updateZoneinfo(@Args('updateZoneinfoInput') updateZoneinfoInput: UpdateZoneinfoInput) {
-    return this.zoneinfoService.update(updateZoneinfoInput.id, updateZoneinfoInput);
+  createZone(
+    @Args('createZoneinfoInput') createZoneinfoInput: CreateZoneinfoInput,
+  ) {
+    return this.zoneinfoService.createZone(createZoneinfoInput);
   }
 
   @Mutation(() => Zoneinfo)
-  removeZoneinfo(@Args('id', { type: () => Int }) id: number) {
-    return this.zoneinfoService.remove(id);
+  updateZoneById(
+    @Args('updateZoneinfoInput') updateZoneinfoInput: UpdateZoneinfoInput,
+  ) {
+    return this.zoneinfoService.updateZoneById(updateZoneinfoInput);
+  }
+
+  @Mutation(() => Zoneinfo)
+  deleteZoneById(
+    @Args('updateZoneinfoInput') updateZoneinfoInput: UpdateZoneinfoInput,
+  ) {
+    return this.zoneinfoService.deleteZoneById(updateZoneinfoInput);
   }
 }

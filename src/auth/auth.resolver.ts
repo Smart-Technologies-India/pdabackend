@@ -5,6 +5,7 @@ import { CreateAuthInput } from './dto/create-auth.input';
 import { UpdateAuthInput } from './dto/update-auth.input';
 import { LoginUserInput } from './dto/loginuser.input';
 import { SignUpUserInput } from './dto/signup.input';
+import { MobileLoginInput } from './dto/mobile-auth.input';
 
 @Resolver(() => Auth)
 export class AuthResolver {
@@ -30,5 +31,14 @@ export class AuthResolver {
   @Query(() => Auth)
   loginwithid(@Args('id', { type: () => Int }) id: number) {
     return this.authService.loginwithid(id);
+  }
+
+  @Mutation(() => Auth)
+  mobileLogin(@Args('mobileLoginInput') mobileLoginInput: MobileLoginInput) {
+    return this.authService.mobileLogin(mobileLoginInput);
+  }
+  @Query(() => Auth)
+  verifyOtp(@Args('mobileLoginInput') mobileLoginInput: MobileLoginInput) {
+    return this.authService.verifyOtp(mobileLoginInput);
   }
 }

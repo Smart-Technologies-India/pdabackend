@@ -5,27 +5,27 @@
 type Rti {
   id: Int!
   userId: Int!
-  user_uid: String!
-  name: String!
-  email: String!
-  address: String!
-  mobile: Float!
-  subject_info: String!
-  from_date: DateTime!
-  to_date: DateTime!
-  description: String!
-  information: String!
-  proverty_line_url: String!
+  user_uid: String
+  name: String
+  email: String
+  address: String
+  mobile: Float
+  subject_info: String
+  from_date: DateTime
+  to_date: DateTime
+  description: String
+  information: String
+  proverty_line_url: String
   iagree: Agree!
-  remarks: String!
-  signature_url: String!
-  attachments: String!
-  rejection_reason: String!
-  certificate_id: Status!
-  certificate_date: DateTime!
-  certificate_url: String!
-  comments_dept: String!
-  condition_to_follow: String!
+  remarks: String
+  signature_url: String
+  attachments: String
+  rejection_reason: String
+  certificate_id: Status
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -56,6 +56,7 @@ type User {
   email: String
   password: String!
   contact: String
+  otp: String
   pic_url: String
   access_kay: String
   role: Role!
@@ -99,18 +100,130 @@ enum Department {
 }
 
 type Petroleum {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  company_name: String
+  company_region: String
+  designation: String
+  location_address: String
+  noc_type: NocType
+  class_type: ClassType
+  outlet_type: OutletType
+  capacity: Int
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  noc_fire_url: String
+  na_order_url: String
+  sanad_url: String
+  coastguard_url: String
+  plan_url: String
+  explosive_url: String
+  iagree: Agree
+  remarks: String
+  signature_url: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  status: Status
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum NocType {
+  NONE
+  NOCTYPEONE
+  NOCTYPETWO
+  NOCTYPETHREE
+}
+
+enum ClassType {
+  NONE
+  CLASSTYPEONE
+  CLASSTYPETWO
+  CLASSTYPETHREE
+}
+
+enum OutletType {
+  NONE
+  OUTLETTYPEONE
+  OUTLETTYPETWO
+  OUTLETTYPETHREE
 }
 
 type Zoneinfo {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  userId: Int!
+  user_uid: String
+  name: String
+  email: String
+  address: String
+  mobile: String
+  village_id: Int
+  survey_no: String
+  sub_division: String
+  nakel_url_1_14: String
+  iagree: Agree!
+  remarks: String
+  signature_url: String
+  attachments: String
+  rejection_reason: String
+  certificate_id: Status
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
 }
 
 type Oldcopy {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  userId: Int!
+  user_uid: String
+  name: String
+  email: String
+  address: String
+  mobile: String
+  village_id: Int
+  survey_no: String
+  sub_division: String
+  prev_application_date: DateTime
+  prev_application_number: String
+  type_of_information: TypeOfInfo!
+  information_needed: String
+  aadhar_url: String
+  iagree: Agree!
+  remarks: String
+  signature_url: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum TypeOfInfo {
+  NONE
+  CP
+  OC
+  MAPS
 }
 
 type Auth {
@@ -121,6 +234,7 @@ type Auth {
   email: String
   password: String!
   contact: String
+  otp: String
   pic_url: String
   access_kay: String
   role: Role!
@@ -159,7 +273,7 @@ enum FormType {
   DEMOLITION
   OLDCOPY
   LANDRECORDS
-  MAMLATDAR
+  UNAUTHORISED
 }
 
 enum queryStatus {
@@ -170,6 +284,45 @@ enum queryStatus {
   APPROVED
   REJCTED
   CERTIFICATEGRANT
+  COMPLETED
+}
+
+type FileCount {
+  RTI: Int!
+  ZONE: Int!
+  OLDCOPY: Int!
+  PETROLEUM: Int!
+  UNAUTHORIZED: Int!
+  LANDRECORDS: Int!
+  MAMLATDAR: Int!
+  DEMOLITION: Int!
+}
+
+type VillageCount {
+  count: Int!
+  village: String!
+}
+
+type OfficerCount {
+  count: Int!
+  auth_user_id: String!
+}
+
+type FileProgressDetails {
+  pending: Int!
+  completed: Int!
+  rejected: Int!
+}
+
+type FileProgress {
+  RTI: FileProgressDetails!
+  ZONE: FileProgressDetails!
+  OLDCOPY: FileProgressDetails!
+  PETROLEUM: FileProgressDetails!
+  UNAUTHORIZED: FileProgressDetails!
+  LANDRECORDS: FileProgressDetails!
+  MAMLATDAR: FileProgressDetails!
+  DEMOLITION: FileProgressDetails!
 }
 
 type Landsection {
@@ -194,6 +347,8 @@ type Landsection {
   atp_recommendation: String
   comments_dept: String
   condition_to_follow: String
+  land_formid: String
+  land_stageid: String
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -205,27 +360,98 @@ type Village {
   name: String!
 }
 
+type Survey {
+  id: Int!
+  villageId: Int!
+  survey_no: String!
+  sub_division: String
+  owner_name: String!
+  area: String!
+  zone: String!
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type QueryData {
+  id: Int!
+  stage: FormType!
+  form_id: Int!
+  form_status: Int!
+  from_user_id: Int!
+  to_user_id: Int!
+  query_type: QueryType!
+  query_status: QueryStatus!
+  remark: String!
+  doc_url: String
+  status: Status!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  from_user: User
+  to_user: User
+}
+
+enum QueryType {
+  NONE
+  INTRA
+  INTER
+  PUBLIC
+}
+
+enum QueryStatus {
+  NONE
+  SENT
+  RECEIVED
+  REPLIED
+  RESOLVED
+}
+
 type Query {
   getAllRti: [Rti!]!
   getAllRtiById(id: Int!): Rti!
   getUserById(id: Int!): User!
   getUserDPById(id: Int!): User!
-  petroleum(id: Int!): Petroleum!
-  zoneinfo(id: Int!): Zoneinfo!
-  oldcopy(id: Int!): Oldcopy!
+  getAllPetroleum: [Petroleum!]!
+  getPetroleumById(id: Int!): Petroleum!
+  getAllZone: [Zoneinfo!]!
+  getAllZoneById(id: Int!): Zoneinfo!
+  getAllOldCopy: [Oldcopy!]!
+  getOldCopyById(id: Int!): Oldcopy!
   signin(loginUserInput: LoginUserInput!): Auth!
   loginwithid(id: Int!): Auth!
+  verifyOtp(mobileLoginInput: MobileLoginInput!): Auth!
   getAllCommon: [Common!]!
   getAllCommonById(id: Int!): Common!
   searchCommon(searchCommonInput: SearchCommonInput!): [Common!]!
+  filterCommon(filterCommonInput: FilterCommonInput!): [Common!]!
+  getFileCount: FileCount!
+  villageFileCount: [VillageCount!]!
+  officerFileCount: [OfficerCount!]!
+  officerFileProgress: FileProgress!
   getAllLand: [Landsection!]!
   getAllLandById(id: Int!): Landsection!
+  getAllVillage: [Village!]!
   getAllVillageById(id: Int!): Village!
+  getAllSurvey: [Survey!]!
+  getAllSurveyById(id: Int!): Survey!
+  getSurveyNumber(searchSurveyInput: SearchSurveyInput!): [Survey!]!
+  getSubDivision(searchSurveyInput: SearchSurveyInput!): [Survey!]!
+  getAllQuery: [QueryData!]!
+  getQueryById(id: Int!): QueryData!
+  searchQuery(searchQueryInput: SearchQueryInput!): [QueryData!]!
 }
 
 input LoginUserInput {
   contact: String!
   password: String!
+}
+
+input MobileLoginInput {
+  contact: String
+  name: String
+  otp: String
 }
 
 input SearchCommonInput {
@@ -246,21 +472,48 @@ input SearchCommonInput {
   deletedAt: DateTime
 }
 
+input FilterCommonInput {
+  user_type: UserType
+  user_id: Int!
+  form_type: FormType
+}
+
+enum UserType {
+  USER
+  DEPARTMENT
+}
+
+input SearchSurveyInput {
+  villageId: Int
+  survey_no: String
+  sub_division: String
+  owner_name: String
+}
+
+input SearchQueryInput {
+  stage: FormType!
+  form_id: Int!
+  user_id: Int
+  status: Status
+  query_type: QueryType
+}
+
 type Mutation {
   createRti(createRtiInput: CreateRtiInput!): Rti!
   updateRtiById(updateRtiInput: UpdateRtiInput!): Rti!
   deleteRtiById(updateRtiInput: UpdateRtiInput!): Rti!
   updateUserDPById(updateUserInput: UpdateUserInput!): Int!
   createPetroleum(createPetroleumInput: CreatePetroleumInput!): Petroleum!
-  updatePetroleum(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
-  removePetroleum(id: Int!): Petroleum!
-  createZoneinfo(createZoneinfoInput: CreateZoneinfoInput!): Zoneinfo!
-  updateZoneinfo(updateZoneinfoInput: UpdateZoneinfoInput!): Zoneinfo!
-  removeZoneinfo(id: Int!): Zoneinfo!
-  createOldcopy(createOldcopyInput: CreateOldcopyInput!): Oldcopy!
-  updateOldcopy(updateOldcopyInput: UpdateOldcopyInput!): Oldcopy!
-  removeOldcopy(id: Int!): Oldcopy!
+  updatePetroleumById(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
+  deletePetroleumById(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
+  createZone(createZoneinfoInput: CreateZoneinfoInput!): Zoneinfo!
+  updateZoneById(updateZoneinfoInput: UpdateZoneinfoInput!): Zoneinfo!
+  deleteZoneById(updateZoneinfoInput: UpdateZoneinfoInput!): Zoneinfo!
+  createOldCopy(createOldcopyInput: CreateOldcopyInput!): Oldcopy!
+  updateOldCopyById(updateOldcopyInput: UpdateOldcopyInput!): Oldcopy!
+  deleteOldCopuById(updateOldcopyInput: UpdateOldcopyInput!): Oldcopy!
   signup(signUpUserInput: SignUpUserInput!): Auth!
+  mobileLogin(mobileLoginInput: MobileLoginInput!): Auth!
   createCommon(createCommonInput: CreateCommonInput!): Common!
   updateCommonById(updateCommonInput: UpdateCommonInput!): Common!
   deleteCommonById(updateCommonInput: UpdateCommonInput!): Common!
@@ -268,6 +521,9 @@ type Mutation {
   updateLandById(updateLandsectionInput: UpdateLandsectionInput!): Landsection!
   deleteLandById(updateLandsectionInput: UpdateLandsectionInput!): Landsection!
   getFromOutside(outsideLandsectionInput: OutsideLandsectionInput!): Common!
+  createQuery(createQueryInput: CreateQueryInput!): QueryData!
+  updateQueryById(updateQueryInput: UpdateQueryInput!): QueryData!
+  deleteQueryById(updateQueryInput: UpdateQueryInput!): QueryData!
 }
 
 input CreateRtiInput {
@@ -336,36 +592,160 @@ input UpdateUserInput {
 }
 
 input CreatePetroleumInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  userId: Int!
+  address: String!
+  mobile: String!
+  email: String
+  company_name: String
+  company_region: String
+  designation: String
+  noc_type: NocType
+  class_type: ClassType
+  outlet_type: OutletType
+  capacity: Int
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  noc_fire_url: String
+  na_order_url: String
+  sanad_url: String
+  coastguard_url: String
+  plan_url: String
+  explosive_url: String
+  iagree: Agree
+  status: Status
 }
 
 input UpdatePetroleumInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  userId: Int
+  address: String
+  mobile: String
+  email: String
+  company_name: String
+  company_region: String
+  designation: String
+  noc_type: NocType
+  class_type: ClassType
+  outlet_type: OutletType
+  capacity: Int
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  noc_fire_url: String
+  na_order_url: String
+  sanad_url: String
+  coastguard_url: String
+  plan_url: String
+  explosive_url: String
+  iagree: Agree
+  status: Status
   id: Int!
+  user_uid: String
+  location_address: String
+  remarks: String
+  signature_url: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  deletedAt: DateTime
 }
 
 input CreateZoneinfoInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  userId: Int
+  user_uid: String
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  nakel_url_1_14: String!
+  remarks: String
+  nakal_url_1_14: String
+  signature_url: String
+  iagree: Agree
+  status: Status
 }
 
 input UpdateZoneinfoInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  nakel_url_1_14: String
+  remarks: String
+  nakal_url_1_14: String
+  signature_url: String
+  iagree: Agree
+  status: Status
   id: Int!
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  deletedAt: DateTime
 }
 
 input CreateOldcopyInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  userId: Int
+  user_uid: String
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  prev_application_date: DateTime
+  prev_application_number: String
+  type_of_information: TypeOfInfo
+  information_needed: String
+  aadhar_url: String
+  signature_url: String
+  iagree: Agree
+  status: Status
 }
 
 input UpdateOldcopyInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  prev_application_date: DateTime
+  prev_application_number: String
+  type_of_information: TypeOfInfo
+  information_needed: String
+  aadhar_url: String
+  signature_url: String
+  iagree: Agree
+  status: Status!
   id: Int!
+  remarks: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  deletedAt: DateTime
 }
 
 input SignUpUserInput {
@@ -468,4 +848,32 @@ input OutsideLandsectionInput {
   area: String!
   purpose: String!
   number: String!
+}
+
+input CreateQueryInput {
+  stage: FormType!
+  form_id: Int!
+  form_status: Int!
+  from_user_id: Int!
+  to_user_id: Int!
+  query_type: QueryType!
+  query_status: QueryStatus!
+  remark: String!
+  doc_url: String
+  status: Status
+}
+
+input UpdateQueryInput {
+  stage: FormType!
+  form_id: Int!
+  form_status: Int!
+  from_user_id: Int!
+  to_user_id: Int!
+  query_type: QueryType!
+  query_status: QueryStatus!
+  remark: String!
+  doc_url: String
+  status: Status
+  id: Int!
+  deletedAt: DateTime
 }

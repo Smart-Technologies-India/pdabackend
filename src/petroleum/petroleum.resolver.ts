@@ -8,28 +8,28 @@ import { UpdatePetroleumInput } from './dto/update-petroleum.input';
 export class PetroleumResolver {
   constructor(private readonly petroleumService: PetroleumService) {}
 
+  @Query(() => [Petroleum])
+  getAllPetroleum() {
+    return this.petroleumService.getAllPetroleum();
+  }
+
+  @Query(() => Petroleum)
+  getPetroleumById(@Args('id', { type: () => Int }) id: number) {
+    return this.petroleumService.getPetroleumById(id);
+  }
+
   @Mutation(() => Petroleum)
   createPetroleum(@Args('createPetroleumInput') createPetroleumInput: CreatePetroleumInput) {
-    return this.petroleumService.create(createPetroleumInput);
-  }
-
-  @Query(() => [Petroleum], { name: 'petroleum' })
-  findAll() {
-    return this.petroleumService.findAll();
-  }
-
-  @Query(() => Petroleum, { name: 'petroleum' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.petroleumService.findOne(id);
+    return this.petroleumService.createPetroleum(createPetroleumInput);
   }
 
   @Mutation(() => Petroleum)
-  updatePetroleum(@Args('updatePetroleumInput') updatePetroleumInput: UpdatePetroleumInput) {
-    return this.petroleumService.update(updatePetroleumInput.id, updatePetroleumInput);
+  updatePetroleumById(@Args('updatePetroleumInput') updatePetroleumInput: UpdatePetroleumInput) {
+    return this.petroleumService.updatePetroleumById(updatePetroleumInput);
   }
 
   @Mutation(() => Petroleum)
-  removePetroleum(@Args('id', { type: () => Int }) id: number) {
-    return this.petroleumService.remove(id);
+  deletePetroleumById(@Args('updatePetroleumInput') updatePetroleumInput: UpdatePetroleumInput) {
+    return this.petroleumService.deletePetroleumById(updatePetroleumInput);
   }
 }

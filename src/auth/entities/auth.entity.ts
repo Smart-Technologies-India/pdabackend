@@ -39,6 +39,9 @@ export class Auth {
   contact: string;
 
   @Field(() => String, { nullable: true })
+  otp: string;
+
+  @Field(() => String, { nullable: true })
   pic_url: string;
 
   @Field(() => String, { nullable: true })

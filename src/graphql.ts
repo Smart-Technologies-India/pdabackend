@@ -52,6 +52,34 @@ export enum Department {
     COASTGUARD = "COASTGUARD"
 }
 
+export enum NocType {
+    NONE = "NONE",
+    NOCTYPEONE = "NOCTYPEONE",
+    NOCTYPETWO = "NOCTYPETWO",
+    NOCTYPETHREE = "NOCTYPETHREE"
+}
+
+export enum ClassType {
+    NONE = "NONE",
+    CLASSTYPEONE = "CLASSTYPEONE",
+    CLASSTYPETWO = "CLASSTYPETWO",
+    CLASSTYPETHREE = "CLASSTYPETHREE"
+}
+
+export enum OutletType {
+    NONE = "NONE",
+    OUTLETTYPEONE = "OUTLETTYPEONE",
+    OUTLETTYPETWO = "OUTLETTYPETWO",
+    OUTLETTYPETHREE = "OUTLETTYPETHREE"
+}
+
+export enum TypeOfInfo {
+    NONE = "NONE",
+    CP = "CP",
+    OC = "OC",
+    MAPS = "MAPS"
+}
+
 export enum FormType {
     NONE = "NONE",
     PETROLEUM = "PETROLEUM",
@@ -60,7 +88,7 @@ export enum FormType {
     DEMOLITION = "DEMOLITION",
     OLDCOPY = "OLDCOPY",
     LANDRECORDS = "LANDRECORDS",
-    MAMLATDAR = "MAMLATDAR"
+    UNAUTHORISED = "UNAUTHORISED"
 }
 
 export enum queryStatus {
@@ -70,12 +98,39 @@ export enum queryStatus {
     QUERYRAISED = "QUERYRAISED",
     APPROVED = "APPROVED",
     REJCTED = "REJCTED",
-    CERTIFICATEGRANT = "CERTIFICATEGRANT"
+    CERTIFICATEGRANT = "CERTIFICATEGRANT",
+    COMPLETED = "COMPLETED"
+}
+
+export enum QueryType {
+    NONE = "NONE",
+    INTRA = "INTRA",
+    INTER = "INTER",
+    PUBLIC = "PUBLIC"
+}
+
+export enum QueryStatus {
+    NONE = "NONE",
+    SENT = "SENT",
+    RECEIVED = "RECEIVED",
+    REPLIED = "REPLIED",
+    RESOLVED = "RESOLVED"
+}
+
+export enum UserType {
+    USER = "USER",
+    DEPARTMENT = "DEPARTMENT"
 }
 
 export interface LoginUserInput {
     contact: string;
     password: string;
+}
+
+export interface MobileLoginInput {
+    contact?: Nullable<string>;
+    name?: Nullable<string>;
+    otp?: Nullable<string>;
 }
 
 export interface SearchCommonInput {
@@ -94,6 +149,27 @@ export interface SearchCommonInput {
     status?: Nullable<Status>;
     id?: Nullable<number>;
     deletedAt?: Nullable<DateTime>;
+}
+
+export interface FilterCommonInput {
+    user_type?: Nullable<UserType>;
+    user_id: number;
+    form_type?: Nullable<FormType>;
+}
+
+export interface SearchSurveyInput {
+    villageId?: Nullable<number>;
+    survey_no?: Nullable<string>;
+    sub_division?: Nullable<string>;
+    owner_name?: Nullable<string>;
+}
+
+export interface SearchQueryInput {
+    stage: FormType;
+    form_id: number;
+    user_id?: Nullable<number>;
+    status?: Nullable<Status>;
+    query_type?: Nullable<QueryType>;
 }
 
 export interface CreateRtiInput {
@@ -161,30 +237,160 @@ export interface UpdateUserInput {
 }
 
 export interface CreatePetroleumInput {
-    exampleField: number;
+    name: string;
+    userId: number;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    company_name?: Nullable<string>;
+    company_region?: Nullable<string>;
+    designation?: Nullable<string>;
+    noc_type?: Nullable<NocType>;
+    class_type?: Nullable<ClassType>;
+    outlet_type?: Nullable<OutletType>;
+    capacity?: Nullable<number>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    noc_fire_url?: Nullable<string>;
+    na_order_url?: Nullable<string>;
+    sanad_url?: Nullable<string>;
+    coastguard_url?: Nullable<string>;
+    plan_url?: Nullable<string>;
+    explosive_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
 }
 
 export interface UpdatePetroleumInput {
-    exampleField?: Nullable<number>;
+    name?: Nullable<string>;
+    userId?: Nullable<number>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    company_name?: Nullable<string>;
+    company_region?: Nullable<string>;
+    designation?: Nullable<string>;
+    noc_type?: Nullable<NocType>;
+    class_type?: Nullable<ClassType>;
+    outlet_type?: Nullable<OutletType>;
+    capacity?: Nullable<number>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    noc_fire_url?: Nullable<string>;
+    na_order_url?: Nullable<string>;
+    sanad_url?: Nullable<string>;
+    coastguard_url?: Nullable<string>;
+    plan_url?: Nullable<string>;
+    explosive_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
     id: number;
+    user_uid?: Nullable<string>;
+    location_address?: Nullable<string>;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface CreateZoneinfoInput {
-    exampleField: number;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name: string;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    nakel_url_1_14: string;
+    remarks?: Nullable<string>;
+    nakal_url_1_14?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
 }
 
 export interface UpdateZoneinfoInput {
-    exampleField?: Nullable<number>;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    nakel_url_1_14?: Nullable<string>;
+    remarks?: Nullable<string>;
+    nakal_url_1_14?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
     id: number;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface CreateOldcopyInput {
-    exampleField: number;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name: string;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    prev_application_date?: Nullable<DateTime>;
+    prev_application_number?: Nullable<string>;
+    type_of_information?: Nullable<TypeOfInfo>;
+    information_needed?: Nullable<string>;
+    aadhar_url?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
 }
 
 export interface UpdateOldcopyInput {
-    exampleField?: Nullable<number>;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    prev_application_date?: Nullable<DateTime>;
+    prev_application_number?: Nullable<string>;
+    type_of_information?: Nullable<TypeOfInfo>;
+    information_needed?: Nullable<string>;
+    aadhar_url?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status: Status;
     id: number;
+    remarks?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface SignUpUserInput {
@@ -289,30 +495,58 @@ export interface OutsideLandsectionInput {
     number: string;
 }
 
+export interface CreateQueryInput {
+    stage: FormType;
+    form_id: number;
+    form_status: number;
+    from_user_id: number;
+    to_user_id: number;
+    query_type: QueryType;
+    query_status: QueryStatus;
+    remark: string;
+    doc_url?: Nullable<string>;
+    status?: Nullable<Status>;
+}
+
+export interface UpdateQueryInput {
+    stage: FormType;
+    form_id: number;
+    form_status: number;
+    from_user_id: number;
+    to_user_id: number;
+    query_type: QueryType;
+    query_status: QueryStatus;
+    remark: string;
+    doc_url?: Nullable<string>;
+    status?: Nullable<Status>;
+    id: number;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface Rti {
     id: number;
     userId: number;
-    user_uid: string;
-    name: string;
-    email: string;
-    address: string;
-    mobile: number;
-    subject_info: string;
-    from_date: DateTime;
-    to_date: DateTime;
-    description: string;
-    information: string;
-    proverty_line_url: string;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<number>;
+    subject_info?: Nullable<string>;
+    from_date?: Nullable<DateTime>;
+    to_date?: Nullable<DateTime>;
+    description?: Nullable<string>;
+    information?: Nullable<string>;
+    proverty_line_url?: Nullable<string>;
     iagree: Agree;
-    remarks: string;
-    signature_url: string;
-    attachments: string;
-    rejection_reason: string;
-    certificate_id: Status;
-    certificate_date: DateTime;
-    certificate_url: string;
-    comments_dept: string;
-    condition_to_follow: string;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    attachments?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<Status>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -326,6 +560,7 @@ export interface User {
     email?: Nullable<string>;
     password: string;
     contact?: Nullable<string>;
+    otp?: Nullable<string>;
     pic_url?: Nullable<string>;
     access_kay?: Nullable<string>;
     role: Role;
@@ -337,15 +572,102 @@ export interface User {
 }
 
 export interface Petroleum {
-    exampleField: number;
+    id?: Nullable<number>;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    company_name?: Nullable<string>;
+    company_region?: Nullable<string>;
+    designation?: Nullable<string>;
+    location_address?: Nullable<string>;
+    noc_type?: Nullable<NocType>;
+    class_type?: Nullable<ClassType>;
+    outlet_type?: Nullable<OutletType>;
+    capacity?: Nullable<number>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    noc_fire_url?: Nullable<string>;
+    na_order_url?: Nullable<string>;
+    sanad_url?: Nullable<string>;
+    coastguard_url?: Nullable<string>;
+    plan_url?: Nullable<string>;
+    explosive_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    status?: Nullable<Status>;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface Zoneinfo {
-    exampleField: number;
+    id: number;
+    userId: number;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    village_id?: Nullable<number>;
+    survey_no?: Nullable<string>;
+    sub_division?: Nullable<string>;
+    nakel_url_1_14?: Nullable<string>;
+    iagree: Agree;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    attachments?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<Status>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface Oldcopy {
-    exampleField: number;
+    id: number;
+    userId: number;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    email?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    village_id?: Nullable<number>;
+    survey_no?: Nullable<string>;
+    sub_division?: Nullable<string>;
+    prev_application_date?: Nullable<DateTime>;
+    prev_application_number?: Nullable<string>;
+    type_of_information: TypeOfInfo;
+    information_needed?: Nullable<string>;
+    aadhar_url?: Nullable<string>;
+    iagree: Agree;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface Auth {
@@ -356,6 +678,7 @@ export interface Auth {
     email?: Nullable<string>;
     password: string;
     contact?: Nullable<string>;
+    otp?: Nullable<string>;
     pic_url?: Nullable<string>;
     access_kay?: Nullable<string>;
     role: Role;
@@ -386,6 +709,44 @@ export interface Common {
     deletedAt: DateTime;
 }
 
+export interface FileCount {
+    RTI: number;
+    ZONE: number;
+    OLDCOPY: number;
+    PETROLEUM: number;
+    UNAUTHORIZED: number;
+    LANDRECORDS: number;
+    MAMLATDAR: number;
+    DEMOLITION: number;
+}
+
+export interface VillageCount {
+    count: number;
+    village: string;
+}
+
+export interface OfficerCount {
+    count: number;
+    auth_user_id: string;
+}
+
+export interface FileProgressDetails {
+    pending: number;
+    completed: number;
+    rejected: number;
+}
+
+export interface FileProgress {
+    RTI: FileProgressDetails;
+    ZONE: FileProgressDetails;
+    OLDCOPY: FileProgressDetails;
+    PETROLEUM: FileProgressDetails;
+    UNAUTHORIZED: FileProgressDetails;
+    LANDRECORDS: FileProgressDetails;
+    MAMLATDAR: FileProgressDetails;
+    DEMOLITION: FileProgressDetails;
+}
+
 export interface Landsection {
     id?: Nullable<number>;
     userId?: Nullable<number>;
@@ -408,6 +769,8 @@ export interface Landsection {
     atp_recommendation?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    land_formid?: Nullable<string>;
+    land_stageid?: Nullable<string>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -419,22 +782,72 @@ export interface Village {
     name: string;
 }
 
+export interface Survey {
+    id: number;
+    villageId: number;
+    survey_no: string;
+    sub_division?: Nullable<string>;
+    owner_name: string;
+    area: string;
+    zone: string;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface QueryData {
+    id: number;
+    stage: FormType;
+    form_id: number;
+    form_status: number;
+    from_user_id: number;
+    to_user_id: number;
+    query_type: QueryType;
+    query_status: QueryStatus;
+    remark: string;
+    doc_url?: Nullable<string>;
+    status: Status;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+    from_user?: Nullable<User>;
+    to_user?: Nullable<User>;
+}
+
 export interface IQuery {
     getAllRti(): Rti[] | Promise<Rti[]>;
     getAllRtiById(id: number): Rti | Promise<Rti>;
     getUserById(id: number): User | Promise<User>;
     getUserDPById(id: number): User | Promise<User>;
-    petroleum(id: number): Petroleum | Promise<Petroleum>;
-    zoneinfo(id: number): Zoneinfo | Promise<Zoneinfo>;
-    oldcopy(id: number): Oldcopy | Promise<Oldcopy>;
+    getAllPetroleum(): Petroleum[] | Promise<Petroleum[]>;
+    getPetroleumById(id: number): Petroleum | Promise<Petroleum>;
+    getAllZone(): Zoneinfo[] | Promise<Zoneinfo[]>;
+    getAllZoneById(id: number): Zoneinfo | Promise<Zoneinfo>;
+    getAllOldCopy(): Oldcopy[] | Promise<Oldcopy[]>;
+    getOldCopyById(id: number): Oldcopy | Promise<Oldcopy>;
     signin(loginUserInput: LoginUserInput): Auth | Promise<Auth>;
     loginwithid(id: number): Auth | Promise<Auth>;
+    verifyOtp(mobileLoginInput: MobileLoginInput): Auth | Promise<Auth>;
     getAllCommon(): Common[] | Promise<Common[]>;
     getAllCommonById(id: number): Common | Promise<Common>;
     searchCommon(searchCommonInput: SearchCommonInput): Common[] | Promise<Common[]>;
+    filterCommon(filterCommonInput: FilterCommonInput): Common[] | Promise<Common[]>;
+    getFileCount(): FileCount | Promise<FileCount>;
+    villageFileCount(): VillageCount[] | Promise<VillageCount[]>;
+    officerFileCount(): OfficerCount[] | Promise<OfficerCount[]>;
+    officerFileProgress(): FileProgress | Promise<FileProgress>;
     getAllLand(): Landsection[] | Promise<Landsection[]>;
     getAllLandById(id: number): Landsection | Promise<Landsection>;
+    getAllVillage(): Village[] | Promise<Village[]>;
     getAllVillageById(id: number): Village | Promise<Village>;
+    getAllSurvey(): Survey[] | Promise<Survey[]>;
+    getAllSurveyById(id: number): Survey | Promise<Survey>;
+    getSurveyNumber(searchSurveyInput: SearchSurveyInput): Survey[] | Promise<Survey[]>;
+    getSubDivision(searchSurveyInput: SearchSurveyInput): Survey[] | Promise<Survey[]>;
+    getAllQuery(): QueryData[] | Promise<QueryData[]>;
+    getQueryById(id: number): QueryData | Promise<QueryData>;
+    searchQuery(searchQueryInput: SearchQueryInput): QueryData[] | Promise<QueryData[]>;
 }
 
 export interface IMutation {
@@ -443,15 +856,16 @@ export interface IMutation {
     deleteRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
     updateUserDPById(updateUserInput: UpdateUserInput): number | Promise<number>;
     createPetroleum(createPetroleumInput: CreatePetroleumInput): Petroleum | Promise<Petroleum>;
-    updatePetroleum(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;
-    removePetroleum(id: number): Petroleum | Promise<Petroleum>;
-    createZoneinfo(createZoneinfoInput: CreateZoneinfoInput): Zoneinfo | Promise<Zoneinfo>;
-    updateZoneinfo(updateZoneinfoInput: UpdateZoneinfoInput): Zoneinfo | Promise<Zoneinfo>;
-    removeZoneinfo(id: number): Zoneinfo | Promise<Zoneinfo>;
-    createOldcopy(createOldcopyInput: CreateOldcopyInput): Oldcopy | Promise<Oldcopy>;
-    updateOldcopy(updateOldcopyInput: UpdateOldcopyInput): Oldcopy | Promise<Oldcopy>;
-    removeOldcopy(id: number): Oldcopy | Promise<Oldcopy>;
+    updatePetroleumById(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;
+    deletePetroleumById(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;
+    createZone(createZoneinfoInput: CreateZoneinfoInput): Zoneinfo | Promise<Zoneinfo>;
+    updateZoneById(updateZoneinfoInput: UpdateZoneinfoInput): Zoneinfo | Promise<Zoneinfo>;
+    deleteZoneById(updateZoneinfoInput: UpdateZoneinfoInput): Zoneinfo | Promise<Zoneinfo>;
+    createOldCopy(createOldcopyInput: CreateOldcopyInput): Oldcopy | Promise<Oldcopy>;
+    updateOldCopyById(updateOldcopyInput: UpdateOldcopyInput): Oldcopy | Promise<Oldcopy>;
+    deleteOldCopuById(updateOldcopyInput: UpdateOldcopyInput): Oldcopy | Promise<Oldcopy>;
     signup(signUpUserInput: SignUpUserInput): Auth | Promise<Auth>;
+    mobileLogin(mobileLoginInput: MobileLoginInput): Auth | Promise<Auth>;
     createCommon(createCommonInput: CreateCommonInput): Common | Promise<Common>;
     updateCommonById(updateCommonInput: UpdateCommonInput): Common | Promise<Common>;
     deleteCommonById(updateCommonInput: UpdateCommonInput): Common | Promise<Common>;
@@ -459,6 +873,9 @@ export interface IMutation {
     updateLandById(updateLandsectionInput: UpdateLandsectionInput): Landsection | Promise<Landsection>;
     deleteLandById(updateLandsectionInput: UpdateLandsectionInput): Landsection | Promise<Landsection>;
     getFromOutside(outsideLandsectionInput: OutsideLandsectionInput): Common | Promise<Common>;
+    createQuery(createQueryInput: CreateQueryInput): QueryData | Promise<QueryData>;
+    updateQueryById(updateQueryInput: UpdateQueryInput): QueryData | Promise<QueryData>;
+    deleteQueryById(updateQueryInput: UpdateQueryInput): QueryData | Promise<QueryData>;
 }
 
 export type DateTime = any;

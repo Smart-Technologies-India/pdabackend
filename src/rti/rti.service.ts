@@ -82,12 +82,12 @@ export class RtiService {
       throw new NotFoundException(`Rti with id ${rti.id} not found`);
     }
 
-    const deleteRit = this.prisma.rti_form.update({
+    const deleteRti = this.prisma.rti_form.update({
       where: { id: rti.id },
       data: { deletedAt: rti.deletedAt },
     });
 
-    if (!deleteRit) throw new BadRequestException('Unable to update rti.');
-    return deleteRit;
+    if (!deleteRti) throw new BadRequestException('Unable to update rti.');
+    return deleteRti;
   }
 }

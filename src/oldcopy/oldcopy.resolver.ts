@@ -8,28 +8,34 @@ import { UpdateOldcopyInput } from './dto/update-oldcopy.input';
 export class OldcopyResolver {
   constructor(private readonly oldcopyService: OldcopyService) {}
 
-  @Mutation(() => Oldcopy)
-  createOldcopy(@Args('createOldcopyInput') createOldcopyInput: CreateOldcopyInput) {
-    return this.oldcopyService.create(createOldcopyInput);
+  @Query(() => [Oldcopy])
+  getAllOldCopy() {
+    return this.oldcopyService.getAllOldCopy();
   }
 
-  @Query(() => [Oldcopy], { name: 'oldcopy' })
-  findAll() {
-    return this.oldcopyService.findAll();
-  }
-
-  @Query(() => Oldcopy, { name: 'oldcopy' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.oldcopyService.findOne(id);
+  @Query(() => Oldcopy)
+  getOldCopyById(@Args('id', { type: () => Int }) id: number) {
+    return this.oldcopyService.getOldCopyById(id);
   }
 
   @Mutation(() => Oldcopy)
-  updateOldcopy(@Args('updateOldcopyInput') updateOldcopyInput: UpdateOldcopyInput) {
-    return this.oldcopyService.update(updateOldcopyInput.id, updateOldcopyInput);
+  createOldCopy(
+    @Args('createOldcopyInput') createOldcopyInput: CreateOldcopyInput,
+  ) {
+    return this.oldcopyService.createOldCopy(createOldcopyInput);
   }
 
   @Mutation(() => Oldcopy)
-  removeOldcopy(@Args('id', { type: () => Int }) id: number) {
-    return this.oldcopyService.remove(id);
+  updateOldCopyById(
+    @Args('updateOldcopyInput') updateOldcopyInput: UpdateOldcopyInput,
+  ) {
+    return this.oldcopyService.updateOldCopyById(updateOldcopyInput);
+  }
+
+  @Mutation(() => Oldcopy)
+  deleteOldCopuById(
+    @Args('updateOldcopyInput') updateOldcopyInput: UpdateOldcopyInput,
+  ) {
+    return this.oldcopyService.deleteOldCopuById(updateOldcopyInput);
   }
 }

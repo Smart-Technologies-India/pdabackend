@@ -16,4 +16,10 @@ export class VillageService {
       throw new BadRequestException('No village exist with this id.');
     return village;
   }
+
+  async getAllVillage() {
+    const village = await this.prisma.village.findMany();
+    if (village.length == 0) throw new BadRequestException('No village exist.');
+    return village;
+  }
 }

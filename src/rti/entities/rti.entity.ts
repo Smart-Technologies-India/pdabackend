@@ -9,67 +9,67 @@ export class Rti {
   @Field(() => Int)
   userId: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   user_uid: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   name: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   email: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   address: string;
 
-  @Field(() => Float)
+  @Field(() => Float, { nullable: true })
   mobile: number;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   subject_info: string;
 
-  @Field(() => Date)
+  @Field(() => Date, { nullable: true })
   from_date: Date;
 
-  @Field(() => Date)
+  @Field(() => Date, { nullable: true })
   to_date: Date;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   description: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   information: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   proverty_line_url: string;
 
   @Field(() => Agree)
   iagree: Agree;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   remarks: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   signature_url: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   attachments: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   rejection_reason: string;
 
-  @Field(() => Status)
+  @Field(() => Status, { nullable: true })
   certificate_id: string;
 
-  @Field(() => Date)
+  @Field(() => Date, { nullable: true })
   certificate_date: Date;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   certificate_url: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   comments_dept: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   condition_to_follow: string;
 
   @Field(() => Status)

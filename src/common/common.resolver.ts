@@ -4,6 +4,11 @@ import { Common } from './entities/common.entity';
 import { CreateCommonInput } from './dto/create-common.input';
 import { UpdateCommonInput } from './dto/update-common.input';
 import { SearchCommonInput } from './dto/search-common.input';
+import { FileCount } from './entities/filecount.entity';
+import { VillageCount } from './entities/villagecount.entity';
+import { OfficerCount } from './entities/officercount.entity';
+import { FilterCommonInput } from './dto/filter-common.input';
+import { FileProgress } from './entities/process.entiry';
 
 @Resolver(() => Common)
 export class CommonResolver {
@@ -26,6 +31,13 @@ export class CommonResolver {
     return this.commonService.searchCommon(searchCommonInput);
   }
 
+  @Query(() => [Common])
+  filterCommon(
+    @Args('filterCommonInput') filterCommonInput: FilterCommonInput,
+  ) {
+    return this.commonService.filterCommon(filterCommonInput);
+  }
+
   @Mutation(() => Common)
   createCommon(
     @Args('createCommonInput') createCommonInput: CreateCommonInput,
@@ -45,5 +57,25 @@ export class CommonResolver {
     @Args('updateCommonInput') updateCommonInput: UpdateCommonInput,
   ) {
     return this.commonService.deleteCommonById(updateCommonInput);
+  }
+
+  @Query(() => FileCount)
+  getFileCount() {
+    return this.commonService.getFileCount();
+  }
+
+  @Query(() => [VillageCount])
+  villageFileCount() {
+    return this.commonService.villageFileCount();
+  }
+
+  @Query(() => [OfficerCount])
+  officerFileCount() {
+    return this.commonService.officerFileCount();
+  }
+
+  @Query(() => FileProgress)
+  officerFileProgress() {
+    return this.commonService.officerFileProgress();
   }
 }

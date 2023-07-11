@@ -8,6 +8,11 @@ import { UpdateVillageInput } from './dto/update-village.input';
 export class VillageResolver {
   constructor(private readonly villageService: VillageService) {}
 
+  @Query(() => [Village])
+  getAllVillage() {
+    return this.villageService.getAllVillage();
+  }
+
   @Query(() => Village)
   getAllVillageById(@Args('id', { type: () => Int }) id: number) {
     return this.villageService.getAllVillageById(id);

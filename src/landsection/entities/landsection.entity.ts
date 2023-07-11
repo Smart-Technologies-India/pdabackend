@@ -66,6 +66,12 @@ export class Landsection {
   @Field(() => String, { nullable: true })
   condition_to_follow: string;
 
+  @Field(() => String, { nullable: true })
+  land_formid: string;
+
+  @Field(() => String, { nullable: true })
+  land_stageid: string;
+
   @Field(() => Status)
   status: Status;
 

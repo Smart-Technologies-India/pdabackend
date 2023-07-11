@@ -16,6 +16,8 @@ import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
 import { LandsectionModule } from './landsection/landsection.module';
 import { VillageModule } from './village/village.module';
+import { SurveyModule } from './survey/survey.module';
+import { QueryModule } from './query/query.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { VillageModule } from './village/village.module';
     CommonModule,
     LandsectionModule,
     VillageModule,
+    SurveyModule,
+    QueryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
