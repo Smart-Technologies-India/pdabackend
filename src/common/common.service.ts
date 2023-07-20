@@ -311,4 +311,49 @@ export class CommonService {
 
     return countByFormType;
   }
+
+  async villageFileProgress() {
+    const formTypes = [
+      'RTI',
+      'ZONE',
+      'OLDCOPY',
+      'PETROLEUM',
+      'UNAUTHORIZED',
+      'LANDRECORDS',
+      'MAMLATDAR',
+      'DEMOLITION',
+    ];
+
+    const village = await this.prisma.village.findMany({
+      select: { name: true },
+    });
+    const villageNames = village.map((village) => village.name);
+    const counts = await this.prisma.common.groupBy({
+      by: ['village', 'form_type'],
+      _count: {
+        _all: true,
+      },
+    });
+
+    const formattedResult = villageNames.map((villageName) => {
+      const villageCounts = counts.filter(
+        (entry) => entry.village === villageName,
+      );
+      const villageFileCounts = formTypes.map((formType) => {
+        const count = villageCounts.find(
+          (entry) => entry.form_type === formType,
+        );
+        return {
+          formType: formType,
+          count: count ? count._count._all : 0,
+        };
+      });
+
+      return {
+        village: villageName,
+        fileCounts: villageFileCounts,
+      };
+    });
+    return formattedResult;
+  }
 }

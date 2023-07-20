@@ -157,6 +157,12 @@ export interface FilterCommonInput {
     form_type?: Nullable<FormType>;
 }
 
+export interface SendFileLandsectionInput {
+    stageId: string;
+    formRefId: string;
+    documentUrl: string;
+}
+
 export interface SearchSurveyInput {
     villageId?: Nullable<number>;
     survey_no?: Nullable<string>;
@@ -747,6 +753,16 @@ export interface FileProgress {
     DEMOLITION: FileProgressDetails;
 }
 
+export interface VillageProgressDetails {
+    formType: string;
+    count: number;
+}
+
+export interface VillageProgress {
+    village: string;
+    fileCounts: VillageProgressDetails[];
+}
+
 export interface Landsection {
     id?: Nullable<number>;
     userId?: Nullable<number>;
@@ -837,8 +853,10 @@ export interface IQuery {
     villageFileCount(): VillageCount[] | Promise<VillageCount[]>;
     officerFileCount(): OfficerCount[] | Promise<OfficerCount[]>;
     officerFileProgress(): FileProgress | Promise<FileProgress>;
+    villageFileProgress(): VillageProgress[] | Promise<VillageProgress[]>;
     getAllLand(): Landsection[] | Promise<Landsection[]>;
     getAllLandById(id: number): Landsection | Promise<Landsection>;
+    sendFileOutside(sendFileLandsectionInput: SendFileLandsectionInput): boolean | Promise<boolean>;
     getAllVillage(): Village[] | Promise<Village[]>;
     getAllVillageById(id: number): Village | Promise<Village>;
     getAllSurvey(): Survey[] | Promise<Survey[]>;

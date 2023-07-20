@@ -9,6 +9,7 @@ import { VillageCount } from './entities/villagecount.entity';
 import { OfficerCount } from './entities/officercount.entity';
 import { FilterCommonInput } from './dto/filter-common.input';
 import { FileProgress } from './entities/process.entiry';
+import { VillageProgress } from './entities/villageprocess.entity';
 
 @Resolver(() => Common)
 export class CommonResolver {
@@ -77,5 +78,10 @@ export class CommonResolver {
   @Query(() => FileProgress)
   officerFileProgress() {
     return this.commonService.officerFileProgress();
+  }
+
+  @Query(() => [VillageProgress])
+  villageFileProgress() {
+    return this.commonService.villageFileProgress();
   }
 }

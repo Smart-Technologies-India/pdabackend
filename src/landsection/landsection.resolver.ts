@@ -5,6 +5,7 @@ import { CreateLandsectionInput } from './dto/create-landsection.input';
 import { UpdateLandsectionInput } from './dto/update-landsection.input';
 import { OutsideLandsectionInput } from './dto/outside-landsection.input';
 import { Common } from 'src/common/entities/common.entity';
+import { SendFileLandsectionInput } from './dto/sendfile-landsection.input';
 
 @Resolver(() => Landsection)
 export class LandsectionResolver {
@@ -50,5 +51,13 @@ export class LandsectionResolver {
     outsideLandsectionInput: OutsideLandsectionInput,
   ) {
     return this.landsectionService.getFromOutside(outsideLandsectionInput);
+  }
+
+  @Query(() => Boolean)
+  sendFileOutside(
+    @Args('sendFileLandsectionInput')
+    sendFileLandsectionInput: SendFileLandsectionInput,
+  ) {
+    return this.landsectionService.sendFileOutside(sendFileLandsectionInput);
   }
 }

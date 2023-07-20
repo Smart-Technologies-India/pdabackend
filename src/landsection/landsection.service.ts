@@ -11,6 +11,8 @@ import { domainToUnicode } from 'url';
 import { common } from '@prisma/client';
 import { CommonService } from 'src/common/common.service';
 import { CreateCommonInput } from 'src/common/dto/create-common.input';
+import { SendFileLandsectionInput } from './dto/sendfile-landsection.input';
+import axios from 'axios';
 
 @Injectable()
 export class LandsectionService {
@@ -142,5 +144,23 @@ export class LandsectionService {
       );
 
     return common;
+  }
+  async sendFileOutside(sendFileLandsectionInput: SendFileLandsectionInput) {
+    const req = {
+      stageId: sendFileLandsectionInput.stageId,
+      formRefId: sendFileLandsectionInput.formRefId,
+      fromUserId: '6',
+      toUserId: '8',
+      documentUrl: sendFileLandsectionInput.documentUrl,
+      remarkComment: 'Attached scrutiny report from PDA.',
+      queryType: '20',
+      refFormActionId: '1',
+      queryStatus: 1,
+    };
+    const response = await axios.post(
+      'https://www.bluelemontech.in/websites/ci4-land/cus-add-query',
+      req,
+    );
+    return response.data.status;
   }
 }

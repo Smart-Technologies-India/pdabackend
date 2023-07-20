@@ -325,6 +325,16 @@ type FileProgress {
   DEMOLITION: FileProgressDetails!
 }
 
+type VillageProgressDetails {
+  formType: String!
+  count: Int!
+}
+
+type VillageProgress {
+  village: String!
+  fileCounts: [VillageProgressDetails!]!
+}
+
 type Landsection {
   id: Int
   userId: Int
@@ -430,8 +440,10 @@ type Query {
   villageFileCount: [VillageCount!]!
   officerFileCount: [OfficerCount!]!
   officerFileProgress: FileProgress!
+  villageFileProgress: [VillageProgress!]!
   getAllLand: [Landsection!]!
   getAllLandById(id: Int!): Landsection!
+  sendFileOutside(sendFileLandsectionInput: SendFileLandsectionInput!): Boolean!
   getAllVillage: [Village!]!
   getAllVillageById(id: Int!): Village!
   getAllSurvey: [Survey!]!
@@ -481,6 +493,12 @@ input FilterCommonInput {
 enum UserType {
   USER
   DEPARTMENT
+}
+
+input SendFileLandsectionInput {
+  stageId: String!
+  formRefId: String!
+  documentUrl: String!
 }
 
 input SearchSurveyInput {
