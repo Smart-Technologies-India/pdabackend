@@ -18,6 +18,7 @@ import { LandsectionModule } from './landsection/landsection.module';
 import { VillageModule } from './village/village.module';
 import { SurveyModule } from './survey/survey.module';
 import { QueryModule } from './query/query.module';
+import { DealinghandModule } from './dealinghand/dealinghand.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { QueryModule } from './query/query.module';
     VillageModule,
     SurveyModule,
     QueryModule,
+    DealinghandModule,
   ],
   controllers: [AppController],
   providers: [AppService],

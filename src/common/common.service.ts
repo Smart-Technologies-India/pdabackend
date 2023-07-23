@@ -88,6 +88,9 @@ export class CommonService {
       }
     }
 
+
+    
+
     const Common = await this.prisma.common.create({
       data: dataToCreate,
     });

@@ -163,6 +163,28 @@ export interface SendFileLandsectionInput {
     documentUrl: string;
 }
 
+export interface SearchDealinghandInput {
+    file_type: string;
+    collector: boolean;
+    dycollector: boolean;
+    atp: boolean;
+    jtp: boolean;
+    je: boolean;
+    fieldinspector: boolean;
+    sitesupervisor: boolean;
+    architectassistant: boolean;
+    planningdraughtsman: boolean;
+    spdraughtsman: boolean;
+    stdraughtsman: boolean;
+    landsupted: boolean;
+    mamlatdar: boolean;
+    eocs: boolean;
+    dept1: boolean;
+    dept2: boolean;
+    dept3: boolean;
+    dept4: boolean;
+}
+
 export interface SearchSurveyInput {
     villageId?: Nullable<number>;
     survey_no?: Nullable<string>;
@@ -501,6 +523,51 @@ export interface OutsideLandsectionInput {
     number: string;
 }
 
+export interface CreateDealinghandInput {
+    file_type: FormType;
+    collector?: Nullable<boolean>;
+    dycollector?: Nullable<boolean>;
+    atp?: Nullable<boolean>;
+    jtp?: Nullable<boolean>;
+    je?: Nullable<boolean>;
+    fieldinspector?: Nullable<boolean>;
+    sitesupervisor?: Nullable<boolean>;
+    architectassistant?: Nullable<boolean>;
+    planningdraughtsman?: Nullable<boolean>;
+    spdraughtsman?: Nullable<boolean>;
+    stdraughtsman?: Nullable<boolean>;
+    landsupted?: Nullable<boolean>;
+    mamlatdar?: Nullable<boolean>;
+    eocs?: Nullable<boolean>;
+    dept1?: Nullable<boolean>;
+    dept2?: Nullable<boolean>;
+    dept3?: Nullable<boolean>;
+    dept4?: Nullable<boolean>;
+}
+
+export interface UpdateDealinghandInput {
+    file_type: FormType;
+    collector: boolean;
+    dycollector: boolean;
+    atp: boolean;
+    jtp: boolean;
+    je: boolean;
+    fieldinspector: boolean;
+    sitesupervisor: boolean;
+    architectassistant: boolean;
+    planningdraughtsman: boolean;
+    spdraughtsman: boolean;
+    stdraughtsman: boolean;
+    landsupted: boolean;
+    mamlatdar: boolean;
+    eocs: boolean;
+    dept1: boolean;
+    dept2: boolean;
+    dept3: boolean;
+    dept4: boolean;
+    id: number;
+}
+
 export interface CreateQueryInput {
     stage: FormType;
     form_id: number;
@@ -793,6 +860,32 @@ export interface Landsection {
     deletedAt?: Nullable<DateTime>;
 }
 
+export interface Dealinghand {
+    id: number;
+    file_type: string;
+    collector: boolean;
+    dycollector: boolean;
+    atp: boolean;
+    jtp: boolean;
+    je: boolean;
+    fieldinspector: boolean;
+    sitesupervisor: boolean;
+    architectassistant: boolean;
+    planningdraughtsman: boolean;
+    spdraughtsman: boolean;
+    stdraughtsman: boolean;
+    landsupted: boolean;
+    mamlatdar: boolean;
+    eocs: boolean;
+    dept1: boolean;
+    dept2: boolean;
+    dept3: boolean;
+    dept4: boolean;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface Village {
     id: number;
     name: string;
@@ -857,6 +950,10 @@ export interface IQuery {
     getAllLand(): Landsection[] | Promise<Landsection[]>;
     getAllLandById(id: number): Landsection | Promise<Landsection>;
     sendFileOutside(sendFileLandsectionInput: SendFileLandsectionInput): boolean | Promise<boolean>;
+    getAllDealingHand(): Dealinghand[] | Promise<Dealinghand[]>;
+    getDealingHandById(id: number): Dealinghand | Promise<Dealinghand>;
+    searchDealingHand(searchDealinghandInput: SearchDealinghandInput): Dealinghand[] | Promise<Dealinghand[]>;
+    getuserid(filetype: string): number | Promise<number>;
     getAllVillage(): Village[] | Promise<Village[]>;
     getAllVillageById(id: number): Village | Promise<Village>;
     getAllSurvey(): Survey[] | Promise<Survey[]>;
@@ -891,6 +988,8 @@ export interface IMutation {
     updateLandById(updateLandsectionInput: UpdateLandsectionInput): Landsection | Promise<Landsection>;
     deleteLandById(updateLandsectionInput: UpdateLandsectionInput): Landsection | Promise<Landsection>;
     getFromOutside(outsideLandsectionInput: OutsideLandsectionInput): Common | Promise<Common>;
+    createDealingHand(createDealinghandInput: CreateDealinghandInput): Dealinghand | Promise<Dealinghand>;
+    updateDealingHandById(updateDealinghandInput: UpdateDealinghandInput): Dealinghand | Promise<Dealinghand>;
     createQuery(createQueryInput: CreateQueryInput): QueryData | Promise<QueryData>;
     updateQueryById(updateQueryInput: UpdateQueryInput): QueryData | Promise<QueryData>;
     deleteQueryById(updateQueryInput: UpdateQueryInput): QueryData | Promise<QueryData>;

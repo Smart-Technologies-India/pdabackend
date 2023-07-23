@@ -380,3 +380,29 @@ model land_section_form {
   updatedAt                  DateTime  @updatedAt
   deletedAt                  DateTime?
 }
+
+model dealing_hand {
+  id                  Int       @id @default(autoincrement())
+  file_type           FormType  @default(NONE)
+  collector           Boolean   @default(false)
+  dycollector         Boolean   @default(false)
+  atp                 Boolean   @default(false)
+  jtp                 Boolean   @default(false)
+  je                  Boolean   @default(false)
+  fieldinspector      Boolean   @default(false)
+  sitesupervisor      Boolean   @default(false)
+  architectassistant  Boolean   @default(false)
+  planningdraughtsman Boolean   @default(false)
+  spdraughtsman       Boolean   @default(false)
+  stdraughtsman       Boolean   @default(false)
+  landsupted          Boolean   @default(false)
+  mamlatdar           Boolean   @default(false)
+  eocs                Boolean   @default(false)
+  dept1               Boolean   @default(false)
+  dept2               Boolean   @default(false)
+  dept3               Boolean   @default(false)
+  dept4               Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
+}

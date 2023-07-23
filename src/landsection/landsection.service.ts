@@ -13,10 +13,14 @@ import { CommonService } from 'src/common/common.service';
 import { CreateCommonInput } from 'src/common/dto/create-common.input';
 import { SendFileLandsectionInput } from './dto/sendfile-landsection.input';
 import axios from 'axios';
+import { DealinghandService } from 'src/dealinghand/dealinghand.service';
 
 @Injectable()
 export class LandsectionService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly dealinghand: DealinghandService,
+  ) {}
 
   async getAllLand() {
     const land = await this.prisma.land_section_form.findMany({
@@ -120,10 +124,12 @@ export class LandsectionService {
     if (!village)
       throw new BadRequestException('Unable to find village with this id');
 
+    const auth_id = await this.dealinghand.getuserid('LANDRECORDS');
+
     const common: common = await this.prisma.common.create({
       data: {
         form_id: land.id,
-        auth_user_id: '5',
+        auth_user_id: auth_id.toString(),
         focal_user_id: '5',
         intra_user_id: '3,4',
         inter_user_id: '0',
