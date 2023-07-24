@@ -945,25 +945,25 @@ input CreateDealinghandInput {
 }
 
 input UpdateDealinghandInput {
-  file_type: FormType!
-  collector: Boolean!
-  dycollector: Boolean!
-  atp: Boolean!
-  jtp: Boolean!
-  je: Boolean!
-  fieldinspector: Boolean!
-  sitesupervisor: Boolean!
-  architectassistant: Boolean!
-  planningdraughtsman: Boolean!
-  spdraughtsman: Boolean!
-  stdraughtsman: Boolean!
-  landsupted: Boolean!
-  mamlatdar: Boolean!
-  eocs: Boolean!
-  dept1: Boolean!
-  dept2: Boolean!
-  dept3: Boolean!
-  dept4: Boolean!
+  file_type: FormType
+  collector: Boolean
+  dycollector: Boolean
+  atp: Boolean
+  jtp: Boolean
+  je: Boolean
+  fieldinspector: Boolean
+  sitesupervisor: Boolean
+  architectassistant: Boolean
+  planningdraughtsman: Boolean
+  spdraughtsman: Boolean
+  stdraughtsman: Boolean
+  landsupted: Boolean
+  mamlatdar: Boolean
+  eocs: Boolean
+  dept1: Boolean
+  dept2: Boolean
+  dept3: Boolean
+  dept4: Boolean
   id: Int!
 }
 

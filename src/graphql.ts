@@ -546,25 +546,25 @@ export interface CreateDealinghandInput {
 }
 
 export interface UpdateDealinghandInput {
-    file_type: FormType;
-    collector: boolean;
-    dycollector: boolean;
-    atp: boolean;
-    jtp: boolean;
-    je: boolean;
-    fieldinspector: boolean;
-    sitesupervisor: boolean;
-    architectassistant: boolean;
-    planningdraughtsman: boolean;
-    spdraughtsman: boolean;
-    stdraughtsman: boolean;
-    landsupted: boolean;
-    mamlatdar: boolean;
-    eocs: boolean;
-    dept1: boolean;
-    dept2: boolean;
-    dept3: boolean;
-    dept4: boolean;
+    file_type?: Nullable<FormType>;
+    collector?: Nullable<boolean>;
+    dycollector?: Nullable<boolean>;
+    atp?: Nullable<boolean>;
+    jtp?: Nullable<boolean>;
+    je?: Nullable<boolean>;
+    fieldinspector?: Nullable<boolean>;
+    sitesupervisor?: Nullable<boolean>;
+    architectassistant?: Nullable<boolean>;
+    planningdraughtsman?: Nullable<boolean>;
+    spdraughtsman?: Nullable<boolean>;
+    stdraughtsman?: Nullable<boolean>;
+    landsupted?: Nullable<boolean>;
+    mamlatdar?: Nullable<boolean>;
+    eocs?: Nullable<boolean>;
+    dept1?: Nullable<boolean>;
+    dept2?: Nullable<boolean>;
+    dept3?: Nullable<boolean>;
+    dept4?: Nullable<boolean>;
     id: number;
 }
 
