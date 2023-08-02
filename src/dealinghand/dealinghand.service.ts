@@ -85,7 +85,6 @@ export class DealinghandService {
       );
     }
 
-    console.log(dataToUpdate);
 
     const updatedDealingHand = this.prisma.dealing_hand.update({
       where: { id: dealingHand.id },
