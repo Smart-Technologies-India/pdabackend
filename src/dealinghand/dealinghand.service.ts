@@ -71,10 +71,9 @@ export class DealinghandService {
     } = {};
 
     for (const [key, value] of Object.entries(dealingHand)) {
-      if (value) {
-        dataToUpdate[key] = value;
-      }
+      dataToUpdate[key] = value;
     }
+    delete dataToUpdate['id'];
 
     const existing = await this.prisma.dealing_hand.findUnique({
       where: { id: dealingHand.id },
@@ -85,6 +84,8 @@ export class DealinghandService {
         `Dealing Hand with id ${dealingHand.id} not found`,
       );
     }
+
+    console.log(dataToUpdate);
 
     const updatedDealingHand = this.prisma.dealing_hand.update({
       where: { id: dealingHand.id },
@@ -158,7 +159,6 @@ export class DealinghandService {
       count: countMap.get(String(value)) || 0,
     }));
 
-
     countsAccordingToAuthUserId.sort((a: any, b: any) => {
       if (a.count !== b.count) {
         return a.count - b.count;
@@ -166,7 +166,6 @@ export class DealinghandService {
         return b.authUserId - a.authUserId;
       }
     });
-
 
     const lowestCountUserId = countsAccordingToAuthUserId[0].authUserId;
     return parseInt(lowestCountUserId);
