@@ -92,6 +92,18 @@ export class UpdateLandsectionInput extends PartialType(
   condition_to_follow: string;
 
   @IsOptional()
+  @Field(() => String, { nullable: true })
+  illegal_sqmt: string;
+
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  attachments: string;
+
+  @IsOptional()
+  @Field(() => Boolean, { nullable: true })
+  recommend: boolean;
+
+  @IsOptional()
   @Field(() => Status, { nullable: true })
   status: Status;
 

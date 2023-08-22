@@ -12,7 +12,6 @@ import { diskStorage } from 'multer';
 import { join } from 'path';
 import { Request, Response } from 'express';
 
-
 interface response {
   status: boolean;
   data: unknown;
@@ -31,7 +30,12 @@ export class UploaderController {
         destination: './public/images/',
         filename: (req, file, cb) => {
           const mypath = join('./', 'public/images');
-          cb(null, `${new Date().valueOf()}_${file.originalname}`);
+
+          const originalname = file.originalname;
+          const extension = originalname.split('.').pop();
+          const truncatedName = originalname.substring(0, 10);
+          const filename = `${new Date().valueOf()}_${truncatedName}.${extension}`;
+          cb(null, filename);
         },
       }),
     }),

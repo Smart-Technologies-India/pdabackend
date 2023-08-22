@@ -72,6 +72,15 @@ export class Landsection {
   @Field(() => String, { nullable: true })
   land_stageid: string;
 
+  @Field(() => String, { nullable: true })
+  illegal_sqmt: string;
+
+  @Field(() => String, { nullable: true })
+  attachments: string;
+
+  @Field(() => Boolean, { nullable: true })
+  recommend: boolean;
+
   @Field(() => Status)
   status: Status;
 

@@ -19,6 +19,7 @@ import { VillageModule } from './village/village.module';
 import { SurveyModule } from './survey/survey.module';
 import { QueryModule } from './query/query.module';
 import { DealinghandModule } from './dealinghand/dealinghand.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { DealinghandModule } from './dealinghand/dealinghand.module';
     SurveyModule,
     QueryModule,
     DealinghandModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

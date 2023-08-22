@@ -60,4 +60,12 @@ export class LandsectionResolver {
   ) {
     return this.landsectionService.sendFileOutside(sendFileLandsectionInput);
   }
+
+  @Query(() => Boolean)
+  sendFileOutsideillegal(
+    @Args('sendFileLandsectionInput')
+    sendFileLandsectionInput: SendFileLandsectionInput,
+  ) {
+    return this.landsectionService.sendFileOutsideillegal(sendFileLandsectionInput);
+  }
 }

@@ -169,4 +169,25 @@ export class LandsectionService {
     );
     return response.data.status;
   }
+
+  async sendFileOutsideillegal(
+    sendFileLandsectionInput: SendFileLandsectionInput,
+  ) {
+    const req = {
+      stageId: sendFileLandsectionInput.stageId,
+      formRefId: sendFileLandsectionInput.formRefId,
+      fromUserId: '6',
+      toUserId: '8',
+      documentUrl: sendFileLandsectionInput.documentUrl,
+      remarkComment: 'Illegal construction found on the premisis. Attached photographs of the illegal construction on the site.',
+      queryType: '20',
+      refFormActionId: '1',
+      queryStatus: 1,
+    };
+    const response = await axios.post(
+      'https://www.bluelemontech.in/websites/ci4-land/cus-add-query',
+      req,
+    );
+    return response.data.status;
+  }
 }

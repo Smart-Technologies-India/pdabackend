@@ -359,6 +359,9 @@ type Landsection {
   condition_to_follow: String
   land_formid: String
   land_stageid: String
+  illegal_sqmt: String
+  attachments: String
+  recommend: Boolean
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -444,6 +447,43 @@ enum QueryStatus {
   RESOLVED
 }
 
+type Payment {
+  id: Int!
+  form_id: Int!
+  deptuser_id: Int!
+  user_id: Int!
+  type1: Int
+  amount1: Int
+  type2: Int
+  amount2: Int
+  type3: Int
+  amount3: Int
+  daycount: Int
+  paymentamout: Int
+  reference: String
+  form_type: FormType!
+  paymentType: PaymentType!
+  paymentstatus: PaymentStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+enum PaymentType {
+  NONE
+  CASH
+  CHEQUE
+  NETBANKING
+  CCDC
+  UPI
+}
+
+enum PaymentStatus {
+  NONE
+  PENDING
+  PAID
+}
+
 type Query {
   getAllRti: [Rti!]!
   getAllRtiById(id: Int!): Rti!
@@ -470,6 +510,7 @@ type Query {
   getAllLand: [Landsection!]!
   getAllLandById(id: Int!): Landsection!
   sendFileOutside(sendFileLandsectionInput: SendFileLandsectionInput!): Boolean!
+  sendFileOutsideillegal(sendFileLandsectionInput: SendFileLandsectionInput!): Boolean!
   getAllDealingHand: [Dealinghand!]!
   getDealingHandById(id: Int!): Dealinghand!
   searchDealingHand(searchDealinghandInput: SearchDealinghandInput!): [Dealinghand!]!
@@ -483,6 +524,9 @@ type Query {
   getAllQuery: [QueryData!]!
   getQueryById(id: Int!): QueryData!
   searchQuery(searchQueryInput: SearchQueryInput!): [QueryData!]!
+  getAllPayment: [Payment!]!
+  getAllPaymentById(id: Int!): Payment!
+  searchPayment(searchPaymentInput: SearchPaymentInput!): [Payment!]!
 }
 
 input LoginUserInput {
@@ -568,6 +612,28 @@ input SearchQueryInput {
   query_type: QueryType
 }
 
+input SearchPaymentInput {
+  form_id: Int
+  deptuser_id: Int
+  user_id: Int
+  type1: Int
+  amount1: Int
+  type2: Int
+  amount2: Int
+  type3: Int
+  amount3: Int
+  daycount: Int
+  paymentamout: Int
+  form_type: FormType
+  paymentstatus: PaymentStatus
+  id: Int
+  reference: String
+  paymentType: PaymentType
+  createdAt: DateTime
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
 type Mutation {
   createRti(createRtiInput: CreateRtiInput!): Rti!
   updateRtiById(updateRtiInput: UpdateRtiInput!): Rti!
@@ -596,6 +662,9 @@ type Mutation {
   createQuery(createQueryInput: CreateQueryInput!): QueryData!
   updateQueryById(updateQueryInput: UpdateQueryInput!): QueryData!
   deleteQueryById(updateQueryInput: UpdateQueryInput!): QueryData!
+  createPayment(createPaymentInput: CreatePaymentInput!): Payment!
+  updatePaymentById(updatePaymentInput: UpdatePaymentInput!): Payment!
+  deletePaymentById(updatePaymentInput: UpdatePaymentInput!): Payment!
 }
 
 input CreateRtiInput {
@@ -908,6 +977,9 @@ input UpdateLandsectionInput {
   status: Status
   id: Int
   is_mounment: String
+  illegal_sqmt: String
+  attachments: String
+  recommend: Boolean
   deletedAt: DateTime
 }
 
@@ -992,5 +1064,41 @@ input UpdateQueryInput {
   doc_url: String
   status: Status
   id: Int!
+  deletedAt: DateTime
+}
+
+input CreatePaymentInput {
+  form_id: Int!
+  deptuser_id: Int!
+  user_id: Int!
+  type1: Int
+  amount1: Int
+  type2: Int
+  amount2: Int
+  type3: Int
+  amount3: Int
+  daycount: Int
+  paymentamout: Int
+  form_type: FormType!
+  paymentstatus: PaymentStatus!
+}
+
+input UpdatePaymentInput {
+  form_id: Int
+  deptuser_id: Int
+  user_id: Int
+  type1: Int
+  amount1: Int
+  type2: Int
+  amount2: Int
+  type3: Int
+  amount3: Int
+  daycount: Int
+  paymentamout: Int
+  form_type: FormType
+  paymentstatus: PaymentStatus
+  id: Int!
+  reference: String
+  paymentType: PaymentType
   deletedAt: DateTime
 }

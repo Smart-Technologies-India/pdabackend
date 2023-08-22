@@ -1,0 +1,31 @@
+-- CreateTable
+CREATE TABLE `payment` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `form_type` ENUM('NONE', 'PETROLEUM', 'RTI', 'ZONE', 'DEMOLITION', 'OLDCOPY', 'LANDRECORDS', 'UNAUTHORISED') NOT NULL DEFAULT 'NONE',
+    `form_id` INTEGER NOT NULL,
+    `deptuserId` INTEGER NOT NULL,
+    `userId` INTEGER NOT NULL,
+    `type1` INTEGER NOT NULL,
+    `amount1` INTEGER NOT NULL,
+    `type2` INTEGER NOT NULL,
+    `amount2` INTEGER NOT NULL,
+    `type3` INTEGER NOT NULL,
+    `amount3` INTEGER NOT NULL,
+    `daycount` INTEGER NOT NULL,
+    `paymentamout` INTEGER NOT NULL,
+    `reference` VARCHAR(191) NOT NULL,
+    `paymentType` ENUM('NONE', 'CASH', 'CHEQUE', 'NETBANKING', 'CCDC', 'UPI') NOT NULL DEFAULT 'NONE',
+    `query_status` ENUM('NONE', 'SUBMIT', 'INPROCESS', 'QUERYRAISED', 'APPROVED', 'REJCTED', 'CERTIFICATEGRANT', 'COMPLETED') NOT NULL DEFAULT 'NONE',
+    `status` ENUM('NONE', 'ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'NONE',
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+    `deletedAt` DATETIME(3) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `payment` ADD CONSTRAINT `payment_deptuserId_fkey` FOREIGN KEY (`deptuserId`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `payment` ADD CONSTRAINT `payment_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

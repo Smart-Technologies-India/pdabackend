@@ -117,6 +117,21 @@ export enum QueryStatus {
     RESOLVED = "RESOLVED"
 }
 
+export enum PaymentType {
+    NONE = "NONE",
+    CASH = "CASH",
+    CHEQUE = "CHEQUE",
+    NETBANKING = "NETBANKING",
+    CCDC = "CCDC",
+    UPI = "UPI"
+}
+
+export enum PaymentStatus {
+    NONE = "NONE",
+    PENDING = "PENDING",
+    PAID = "PAID"
+}
+
 export enum UserType {
     USER = "USER",
     DEPARTMENT = "DEPARTMENT"
@@ -198,6 +213,28 @@ export interface SearchQueryInput {
     user_id?: Nullable<number>;
     status?: Nullable<Status>;
     query_type?: Nullable<QueryType>;
+}
+
+export interface SearchPaymentInput {
+    form_id?: Nullable<number>;
+    deptuser_id?: Nullable<number>;
+    user_id?: Nullable<number>;
+    type1?: Nullable<number>;
+    amount1?: Nullable<number>;
+    type2?: Nullable<number>;
+    amount2?: Nullable<number>;
+    type3?: Nullable<number>;
+    amount3?: Nullable<number>;
+    daycount?: Nullable<number>;
+    paymentamout?: Nullable<number>;
+    form_type?: Nullable<FormType>;
+    paymentstatus?: Nullable<PaymentStatus>;
+    id?: Nullable<number>;
+    reference?: Nullable<string>;
+    paymentType?: Nullable<PaymentType>;
+    createdAt?: Nullable<DateTime>;
+    updatedAt?: Nullable<DateTime>;
+    deletedAt?: Nullable<DateTime>;
 }
 
 export interface CreateRtiInput {
@@ -509,6 +546,9 @@ export interface UpdateLandsectionInput {
     status?: Nullable<Status>;
     id?: Nullable<number>;
     is_mounment?: Nullable<string>;
+    illegal_sqmt?: Nullable<string>;
+    attachments?: Nullable<string>;
+    recommend?: Nullable<boolean>;
     deletedAt?: Nullable<DateTime>;
 }
 
@@ -593,6 +633,42 @@ export interface UpdateQueryInput {
     doc_url?: Nullable<string>;
     status?: Nullable<Status>;
     id: number;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface CreatePaymentInput {
+    form_id: number;
+    deptuser_id: number;
+    user_id: number;
+    type1?: Nullable<number>;
+    amount1?: Nullable<number>;
+    type2?: Nullable<number>;
+    amount2?: Nullable<number>;
+    type3?: Nullable<number>;
+    amount3?: Nullable<number>;
+    daycount?: Nullable<number>;
+    paymentamout?: Nullable<number>;
+    form_type: FormType;
+    paymentstatus: PaymentStatus;
+}
+
+export interface UpdatePaymentInput {
+    form_id?: Nullable<number>;
+    deptuser_id?: Nullable<number>;
+    user_id?: Nullable<number>;
+    type1?: Nullable<number>;
+    amount1?: Nullable<number>;
+    type2?: Nullable<number>;
+    amount2?: Nullable<number>;
+    type3?: Nullable<number>;
+    amount3?: Nullable<number>;
+    daycount?: Nullable<number>;
+    paymentamout?: Nullable<number>;
+    form_type?: Nullable<FormType>;
+    paymentstatus?: Nullable<PaymentStatus>;
+    id: number;
+    reference?: Nullable<string>;
+    paymentType?: Nullable<PaymentType>;
     deletedAt?: Nullable<DateTime>;
 }
 
@@ -854,6 +930,9 @@ export interface Landsection {
     condition_to_follow?: Nullable<string>;
     land_formid?: Nullable<string>;
     land_stageid?: Nullable<string>;
+    illegal_sqmt?: Nullable<string>;
+    attachments?: Nullable<string>;
+    recommend?: Nullable<boolean>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -924,6 +1003,28 @@ export interface QueryData {
     to_user?: Nullable<User>;
 }
 
+export interface Payment {
+    id: number;
+    form_id: number;
+    deptuser_id: number;
+    user_id: number;
+    type1?: Nullable<number>;
+    amount1?: Nullable<number>;
+    type2?: Nullable<number>;
+    amount2?: Nullable<number>;
+    type3?: Nullable<number>;
+    amount3?: Nullable<number>;
+    daycount?: Nullable<number>;
+    paymentamout?: Nullable<number>;
+    reference?: Nullable<string>;
+    form_type: FormType;
+    paymentType: PaymentType;
+    paymentstatus: PaymentStatus;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface IQuery {
     getAllRti(): Rti[] | Promise<Rti[]>;
     getAllRtiById(id: number): Rti | Promise<Rti>;
@@ -950,6 +1051,7 @@ export interface IQuery {
     getAllLand(): Landsection[] | Promise<Landsection[]>;
     getAllLandById(id: number): Landsection | Promise<Landsection>;
     sendFileOutside(sendFileLandsectionInput: SendFileLandsectionInput): boolean | Promise<boolean>;
+    sendFileOutsideillegal(sendFileLandsectionInput: SendFileLandsectionInput): boolean | Promise<boolean>;
     getAllDealingHand(): Dealinghand[] | Promise<Dealinghand[]>;
     getDealingHandById(id: number): Dealinghand | Promise<Dealinghand>;
     searchDealingHand(searchDealinghandInput: SearchDealinghandInput): Dealinghand[] | Promise<Dealinghand[]>;
@@ -963,6 +1065,9 @@ export interface IQuery {
     getAllQuery(): QueryData[] | Promise<QueryData[]>;
     getQueryById(id: number): QueryData | Promise<QueryData>;
     searchQuery(searchQueryInput: SearchQueryInput): QueryData[] | Promise<QueryData[]>;
+    getAllPayment(): Payment[] | Promise<Payment[]>;
+    getAllPaymentById(id: number): Payment | Promise<Payment>;
+    searchPayment(searchPaymentInput: SearchPaymentInput): Payment[] | Promise<Payment[]>;
 }
 
 export interface IMutation {
@@ -993,6 +1098,9 @@ export interface IMutation {
     createQuery(createQueryInput: CreateQueryInput): QueryData | Promise<QueryData>;
     updateQueryById(updateQueryInput: UpdateQueryInput): QueryData | Promise<QueryData>;
     deleteQueryById(updateQueryInput: UpdateQueryInput): QueryData | Promise<QueryData>;
+    createPayment(createPaymentInput: CreatePaymentInput): Payment | Promise<Payment>;
+    updatePaymentById(updatePaymentInput: UpdatePaymentInput): Payment | Promise<Payment>;
+    deletePaymentById(updatePaymentInput: UpdatePaymentInput): Payment | Promise<Payment>;
 }
 
 export type DateTime = any;
