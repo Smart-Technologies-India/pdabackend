@@ -22,4 +22,9 @@ export class UserResolver {
   updateUserDPById(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.updateUserDPById(updateUserInput);
   }
+
+  @Mutation(() => User)
+  updateUserById(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.userService.updateUserById(updateUserInput);
+  }
 }

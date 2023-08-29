@@ -46,6 +46,18 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   department: Department;
 
   @IsOptional()
+  @Field(() => String, { nullable: true })
+  address: string;
+
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  otp: string;
+
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  user_uid: string;
+
+  @IsOptional()
   @Field(() => Status, { nullable: true })
   status: Status;
 

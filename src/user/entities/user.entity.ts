@@ -36,6 +36,12 @@ export class User {
   @Field(() => Department)
   department: Department;
 
+  @Field(() => String, { nullable: true })
+  address: string;
+
+  @Field(() => String, { nullable: true })
+  user_uid: string;
+
   @Field(() => Status)
   status: Status;
 

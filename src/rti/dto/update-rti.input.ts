@@ -94,6 +94,10 @@ export class UpdateRtiInput extends PartialType(CreateRtiInput) {
   condition_to_follow: string;
 
   @IsOptional()
+  @Field(() => String, { nullable: true })
+  payment_doc: string;
+
+  @IsOptional()
   @Field(() => Status, { nullable: true })
   status: Status;
 

@@ -146,6 +146,8 @@ model user {
   department      Department       @default(NONE)
   role            Role             @default(NONE)
   otp             String?
+  address         String?
+  user_uid        String?
   status          Status           @default(NONE)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
@@ -251,6 +253,7 @@ model rti_form {
   certificate_url     String?
   comments_dept       String?
   condition_to_follow String?
+  payment_doc         String?
   status              Status    @default(NONE)
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt

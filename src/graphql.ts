@@ -282,6 +282,7 @@ export interface UpdateRtiInput {
     certificate_url?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
     deletedAt?: Nullable<DateTime>;
 }
 
@@ -297,6 +298,9 @@ export interface UpdateUserInput {
     access_kay?: Nullable<string>;
     role?: Nullable<Role>;
     department?: Nullable<Department>;
+    address?: Nullable<string>;
+    otp?: Nullable<string>;
+    user_uid?: Nullable<string>;
     status?: Nullable<Status>;
     deletedAt?: Nullable<DateTime>;
 }
@@ -696,6 +700,7 @@ export interface Rti {
     certificate_url?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -714,6 +719,8 @@ export interface User {
     access_kay?: Nullable<string>;
     role: Role;
     department: Department;
+    address?: Nullable<string>;
+    user_uid?: Nullable<string>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -1075,6 +1082,7 @@ export interface IMutation {
     updateRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
     deleteRtiById(updateRtiInput: UpdateRtiInput): Rti | Promise<Rti>;
     updateUserDPById(updateUserInput: UpdateUserInput): number | Promise<number>;
+    updateUserById(updateUserInput: UpdateUserInput): User | Promise<User>;
     createPetroleum(createPetroleumInput: CreatePetroleumInput): Petroleum | Promise<Petroleum>;
     updatePetroleumById(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;
     deletePetroleumById(updatePetroleumInput: UpdatePetroleumInput): Petroleum | Promise<Petroleum>;

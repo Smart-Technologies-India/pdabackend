@@ -26,6 +26,7 @@ type Rti {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  payment_doc: String
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -61,6 +62,8 @@ type User {
   access_kay: String
   role: Role!
   department: Department!
+  address: String
+  user_uid: String
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -639,6 +642,7 @@ type Mutation {
   updateRtiById(updateRtiInput: UpdateRtiInput!): Rti!
   deleteRtiById(updateRtiInput: UpdateRtiInput!): Rti!
   updateUserDPById(updateUserInput: UpdateUserInput!): Int!
+  updateUserById(updateUserInput: UpdateUserInput!): User!
   createPetroleum(createPetroleumInput: CreatePetroleumInput!): Petroleum!
   updatePetroleumById(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
   deletePetroleumById(updatePetroleumInput: UpdatePetroleumInput!): Petroleum!
@@ -712,6 +716,7 @@ input UpdateRtiInput {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  payment_doc: String
   deletedAt: DateTime
 }
 
@@ -728,6 +733,9 @@ input UpdateUserInput {
   access_kay: String
   role: Role
   department: Department
+  address: String
+  otp: String
+  user_uid: String
   status: Status
   deletedAt: DateTime
 }
