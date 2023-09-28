@@ -75,6 +75,9 @@ export class Oldcopy {
   @Field(() => String, { nullable: true })
   condition_to_follow: string;
 
+  @Field(() => String, { nullable: true })
+  payment_doc: string;
+
   @Field(() => Status)
   status: Status;
 

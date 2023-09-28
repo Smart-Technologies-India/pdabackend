@@ -95,6 +95,7 @@ export enum queryStatus {
     NONE = "NONE",
     SUBMIT = "SUBMIT",
     INPROCESS = "INPROCESS",
+    PAYMENT = "PAYMENT",
     QUERYRAISED = "QUERYRAISED",
     APPROVED = "APPROVED",
     REJCTED = "REJCTED",
@@ -459,6 +460,7 @@ export interface UpdateOldcopyInput {
     certificate_url?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
     deletedAt?: Nullable<DateTime>;
 }
 
@@ -820,6 +822,7 @@ export interface Oldcopy {
     certificate_url?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -1075,6 +1078,7 @@ export interface IQuery {
     getAllPayment(): Payment[] | Promise<Payment[]>;
     getAllPaymentById(id: number): Payment | Promise<Payment>;
     searchPayment(searchPaymentInput: SearchPaymentInput): Payment[] | Promise<Payment[]>;
+    makePayment(): Payment[] | Promise<Payment[]>;
 }
 
 export interface IMutation {

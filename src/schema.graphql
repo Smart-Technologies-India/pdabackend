@@ -216,6 +216,7 @@ type Oldcopy {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  payment_doc: String
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -283,6 +284,7 @@ enum queryStatus {
   NONE
   SUBMIT
   INPROCESS
+  PAYMENT
   QUERYRAISED
   APPROVED
   REJCTED
@@ -530,6 +532,7 @@ type Query {
   getAllPayment: [Payment!]!
   getAllPaymentById(id: Int!): Payment!
   searchPayment(searchPaymentInput: SearchPaymentInput!): [Payment!]!
+  makePayment: [Payment!]!
 }
 
 input LoginUserInput {
@@ -894,6 +897,7 @@ input UpdateOldcopyInput {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  payment_doc: String
   deletedAt: DateTime
 }
 

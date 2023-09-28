@@ -98,6 +98,10 @@ export class UpdateOldcopyInput extends PartialType(CreateOldcopyInput) {
   condition_to_follow: string;
 
   @IsOptional()
+  @Field(() => String, { nullable: true })
+  payment_doc: string;
+
+  @IsOptional()
   @Field(() => Status)
   status: Status;
 
