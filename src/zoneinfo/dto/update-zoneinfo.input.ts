@@ -86,6 +86,10 @@ export class UpdateZoneinfoInput extends PartialType(CreateZoneinfoInput) {
   iagree: Agree;
 
   @IsOptional()
+  @Field(() => String, { nullable: true })
+  payment_doc: string;
+
+  @IsOptional()
   @Field(() => Status, { nullable: true })
   status: Status;
 

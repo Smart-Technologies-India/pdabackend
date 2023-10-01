@@ -411,6 +411,7 @@ export interface UpdateZoneinfoInput {
     certificate_url?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
     deletedAt?: Nullable<DateTime>;
 }
 
@@ -451,7 +452,7 @@ export interface UpdateOldcopyInput {
     aadhar_url?: Nullable<string>;
     signature_url?: Nullable<string>;
     iagree?: Nullable<Agree>;
-    status: Status;
+    status?: Nullable<Status>;
     id: number;
     remarks?: Nullable<string>;
     rejection_reason?: Nullable<string>;
@@ -791,6 +792,7 @@ export interface Zoneinfo {
     certificate_url?: Nullable<string>;
     comments_dept?: Nullable<string>;
     condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
     status: Status;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -1078,7 +1080,6 @@ export interface IQuery {
     getAllPayment(): Payment[] | Promise<Payment[]>;
     getAllPaymentById(id: number): Payment | Promise<Payment>;
     searchPayment(searchPaymentInput: SearchPaymentInput): Payment[] | Promise<Payment[]>;
-    makePayment(): Payment[] | Promise<Payment[]>;
 }
 
 export interface IMutation {

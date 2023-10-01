@@ -185,6 +185,7 @@ type Zoneinfo {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  payment_doc: String
   status: Status!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -532,7 +533,6 @@ type Query {
   getAllPayment: [Payment!]!
   getAllPaymentById(id: Int!): Payment!
   searchPayment(searchPaymentInput: SearchPaymentInput!): [Payment!]!
-  makePayment: [Payment!]!
 }
 
 input LoginUserInput {
@@ -848,6 +848,7 @@ input UpdateZoneinfoInput {
   certificate_url: String
   comments_dept: String
   condition_to_follow: String
+  payment_doc: String
   deletedAt: DateTime
 }
 
@@ -888,7 +889,7 @@ input UpdateOldcopyInput {
   aadhar_url: String
   signature_url: String
   iagree: Agree
-  status: Status!
+  status: Status
   id: Int!
   remarks: String
   rejection_reason: String

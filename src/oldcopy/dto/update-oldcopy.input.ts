@@ -102,7 +102,7 @@ export class UpdateOldcopyInput extends PartialType(CreateOldcopyInput) {
   payment_doc: string;
 
   @IsOptional()
-  @Field(() => Status)
+  @Field(() => Status, { nullable: true })
   status: Status;
 
   @IsOptional()

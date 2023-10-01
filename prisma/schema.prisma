@@ -241,7 +241,7 @@ model rti_form {
   subject_info        String?
   from_date           DateTime?
   to_date             DateTime?
-  description         String?
+  description         String?   @db.MediumText
   information         String?
   proverty_line_url   String?
   iagree              Agree     @default(NONE)
@@ -285,6 +285,7 @@ model zone_info_form {
   certificate_url     String?
   comments_dept       String?
   condition_to_follow String?
+  payment_doc         String?
   status              Status    @default(NONE)
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
