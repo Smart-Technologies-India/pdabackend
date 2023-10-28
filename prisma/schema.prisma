@@ -72,6 +72,9 @@ enum FormType {
   OLDCOPY
   LANDRECORDS
   UNAUTHORISED
+  CP
+  OC
+  PLINTH
 }
 
 enum Agree {
@@ -162,6 +165,9 @@ model user {
   old_copy_form   old_copy_form[]
   userpayment     payment[]        @relation("user")
   deptuserpayment payment[]        @relation("deptuser")
+  cp_form         cp_form[]
+  oc_form         oc_form[]
+  plinth_form     plinth_form[]
 }
 
 model village {
@@ -172,6 +178,9 @@ model village {
   old_copy_form     old_copy_form[]
   land_section_form land_section_form[]
   survey            survey[]
+  cp_form           cp_form[]
+  oc_form           oc_form[]
+  plinth_form       plinth_form[]
 }
 
 model survey {
@@ -453,4 +462,142 @@ model payment {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   deletedAt     DateTime?
+}
+
+model cp_form {
+  id                  Int       @id @default(autoincrement())
+  user                user      @relation(fields: [userId], references: [id])
+  userId              Int
+  user_uid            String?
+  name                String?
+  address             String?
+  mobile              String?
+  email               String?
+  village             village?  @relation(fields: [village_id], references: [id])
+  village_id          Int?
+  survey_no           String?
+  sub_division        String?
+  architect_name      String?
+  architect_license   String?
+  valid_upto          DateTime?
+  applicant_uid       String?
+  annexure_two        String?
+  annexure_three      String?
+  annexure_four       String?
+  annexure_five       String?
+  na_copoy            String?
+  map_copy            String?
+  nakal_1_14          String?
+  building_plan       String?
+  scrutiny_fees       String?
+  coast_guard_noc     String?
+  fire_noc            String?
+  crz_noc             String?
+  layout_plan         String?
+  revised_plan        String?
+  fsi                 String?
+  iagree              Agree     @default(NONE)
+  remarks             String?
+  signature_url       String?
+  attachments         Json?
+  rejection_reason    String?
+  certificate_id      String?
+  certificate_date    DateTime?
+  certificate_url     String?
+  comments_dept       String?
+  condition_to_follow String?
+  payment_doc         String?
+  status              Status    @default(NONE)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
+}
+
+model plinth_form {
+  id                         Int       @id @default(autoincrement())
+  user                       user      @relation(fields: [userId], references: [id])
+  userId                     Int
+  user_uid                   String?
+  name                       String?
+  address                    String?
+  mobile                     String?
+  email                      String?
+  village                    village?  @relation(fields: [village_id], references: [id])
+  village_id                 Int?
+  survey_no                  String?
+  sub_division               String?
+  permission_number          String?
+  permission_date            DateTime?
+  architect_name             String?
+  architect_license          String?
+  valid_upto                 DateTime?
+  architect_address          String?
+  applicant_uid              String?
+  annexure_eleven            String?
+  copy_construcation_license String?
+  building_plan              String?
+  architect_signature        String?
+  iagree                     Agree     @default(NONE)
+  remarks                    String?
+  signature_url              String?
+  attachments                Json?
+  rejection_reason           String?
+  certificate_id             String?
+  certificate_date           DateTime?
+  certificate_url            String?
+  comments_dept              String?
+  condition_to_follow        String?
+  payment_doc                String?
+  status                     Status    @default(NONE)
+  createdAt                  DateTime  @default(now())
+  updatedAt                  DateTime  @updatedAt
+  deletedAt                  DateTime?
+}
+
+model oc_form {
+  id                      Int       @id @default(autoincrement())
+  user                    user      @relation(fields: [userId], references: [id])
+  userId                  Int
+  user_uid                String?
+  name                    String?
+  address                 String?
+  mobile                  String?
+  email                   String?
+  village                 village?  @relation(fields: [village_id], references: [id])
+  village_id              Int?
+  survey_no               String?
+  sub_division            String?
+  permission_number       String?
+  permission_date         DateTime?
+  architect_name          String?
+  architect_license       String?
+  valid_upto              DateTime?
+  completion_date         DateTime?
+  applicant_uid           String?
+  completion_certificate  String?
+  construction_permission String?
+  building_plan           String?
+  annexure_fourteen       String?
+  coast_guard_noc         String?
+  fire_noc                String?
+  rainwater_harvest       String?
+  deviation_plan          String?
+  indemnity               String?
+  valuation_certificate   String?
+  labour_cess             String?
+  iagree                  Agree     @default(NONE)
+  remarks                 String?
+  signature_url           String?
+  attachments             Json?
+  rejection_reason        String?
+  certificate_id          String?
+  certificate_date        DateTime?
+  certificate_url         String?
+  comments_dept           String?
+  condition_to_follow     String?
+  payment_doc             String?
+  status                  Status    @default(NONE)
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  deletedAt               DateTime?
 }

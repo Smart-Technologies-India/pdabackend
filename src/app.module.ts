@@ -20,6 +20,9 @@ import { SurveyModule } from './survey/survey.module';
 import { QueryModule } from './query/query.module';
 import { DealinghandModule } from './dealinghand/dealinghand.module';
 import { PaymentModule } from './payment/payment.module';
+import { CpModule } from './cp/cp.module';
+import { PlinthModule } from './plinth/plinth.module';
+import { OcModule } from './oc/oc.module';
 
 @Module({
   imports: [
@@ -50,6 +53,9 @@ import { PaymentModule } from './payment/payment.module';
     QueryModule,
     DealinghandModule,
     PaymentModule,
+    CpModule,
+    PlinthModule,
+    OcModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -279,6 +279,9 @@ enum FormType {
   OLDCOPY
   LANDRECORDS
   UNAUTHORISED
+  CP
+  OC
+  PLINTH
 }
 
 enum queryStatus {
@@ -490,6 +493,135 @@ enum PaymentStatus {
   PAID
 }
 
+type Cp {
+  id: Int!
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  applicant_uid: String
+  annexure_two: String
+  annexure_three: String
+  annexure_four: String
+  annexure_five: String
+  na_copoy: String
+  map_copy: String
+  nakal_1_14: String
+  building_plan: String
+  scrutiny_fees: String
+  coast_guard_noc: String
+  fire_noc: String
+  crz_noc: String
+  layout_plan: String
+  revised_plan: String
+  fsi: String
+  remarks: String
+  signature_url: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  payment_doc: String
+  iagree: Agree
+  status: Status
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type Plinth {
+  id: Int!
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  permission_number: String
+  permission_date: DateTime
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  architect_address: String
+  applicant_uid: String
+  annexure_eleven: String
+  copy_construcation_license: String
+  building_plan: String
+  architect_signature: String
+  remarks: String
+  signature_url: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  payment_doc: String
+  iagree: Agree
+  status: Status
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
+type Oc {
+  id: Int!
+  userId: Int
+  user_uid: String
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  permission_number: String
+  permission_date: DateTime
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  completion_date: DateTime
+  applicant_uid: String
+  completion_certificate: String
+  construction_permission: String
+  building_plan: String
+  annexure_fourteen: String
+  coast_guard_noc: String
+  fire_noc: String
+  rainwater_harvest: String
+  deviation_plan: String
+  indemnity: String
+  valuation_certificate: String
+  labour_cess: String
+  remarks: String
+  signature_url: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  payment_doc: String
+  iagree: Agree
+  status: Status
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+}
+
 type Query {
   getAllRti: [Rti!]!
   getAllRtiById(id: Int!): Rti!
@@ -533,6 +665,12 @@ type Query {
   getAllPayment: [Payment!]!
   getAllPaymentById(id: Int!): Payment!
   searchPayment(searchPaymentInput: SearchPaymentInput!): [Payment!]!
+  getAllCp: [Cp!]!
+  getCpById(id: Int!): Cp!
+  getAllPlinth: [Plinth!]!
+  getPlinthById(id: Int!): Plinth!
+  getAllOc: [Oc!]!
+  getOcById(id: Int!): Oc!
 }
 
 input LoginUserInput {
@@ -672,6 +810,15 @@ type Mutation {
   createPayment(createPaymentInput: CreatePaymentInput!): Payment!
   updatePaymentById(updatePaymentInput: UpdatePaymentInput!): Payment!
   deletePaymentById(updatePaymentInput: UpdatePaymentInput!): Payment!
+  createCp(createCpInput: CreateCpInput!): Cp!
+  updateCpById(updateCpInput: UpdateCpInput!): Cp!
+  deleteCpById(updateCpInput: UpdateCpInput!): Cp!
+  createPlinth(createPlinthInput: CreatePlinthInput!): Plinth!
+  updatePlinthById(updatePlinthInput: UpdatePlinthInput!): Plinth!
+  deletePlinthById(updatePlinthInput: UpdatePlinthInput!): Plinth!
+  createOc(createOcInput: CreateOcInput!): Oc!
+  updateOcById(updateOcInput: UpdateOcInput!): Oc!
+  deleteOcById(updateOcInput: UpdateOcInput!): Oc!
 }
 
 input CreateRtiInput {
@@ -1113,5 +1260,221 @@ input UpdatePaymentInput {
   id: Int!
   reference: String
   paymentType: PaymentType
+  deletedAt: DateTime
+}
+
+input CreateCpInput {
+  userId: Int
+  user_uid: String
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  applicant_uid: String
+  annexure_two: String
+  annexure_three: String
+  annexure_four: String
+  annexure_five: String
+  na_copoy: String
+  map_copy: String
+  nakal_1_14: String
+  building_plan: String
+  scrutiny_fees: String
+  coast_guard_noc: String
+  fire_noc: String
+  crz_noc: String
+  layout_plan: String
+  revised_plan: String
+  fsi: String
+  signature_url: String
+  iagree: Agree
+  status: Status
+}
+
+input UpdateCpInput {
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  applicant_uid: String
+  annexure_two: String
+  annexure_three: String
+  annexure_four: String
+  annexure_five: String
+  na_copoy: String
+  map_copy: String
+  nakal_1_14: String
+  building_plan: String
+  scrutiny_fees: String
+  coast_guard_noc: String
+  fire_noc: String
+  crz_noc: String
+  layout_plan: String
+  revised_plan: String
+  fsi: String
+  signature_url: String
+  iagree: Agree
+  status: Status
+  id: Int!
+  remarks: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  payment_doc: String
+  deletedAt: DateTime
+}
+
+input CreatePlinthInput {
+  userId: Int
+  user_uid: String
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  permission_number: String
+  permission_date: DateTime
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  architect_address: String
+  applicant_uid: String
+  annexure_eleven: String
+  copy_construcation_license: String
+  building_plan: String
+  architect_signature: String
+  signature_url: String
+  iagree: Agree
+  status: Status
+}
+
+input UpdatePlinthInput {
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  permission_number: String
+  permission_date: DateTime
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  architect_address: String
+  applicant_uid: String
+  annexure_eleven: String
+  copy_construcation_license: String
+  building_plan: String
+  architect_signature: String
+  signature_url: String
+  iagree: Agree
+  status: Status
+  id: Int!
+  remarks: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  payment_doc: String
+  deletedAt: DateTime
+}
+
+input CreateOcInput {
+  userId: Int
+  user_uid: String
+  name: String!
+  address: String!
+  mobile: String!
+  email: String
+  survey_no: String!
+  village_id: Int!
+  sub_division: String!
+  permission_number: String
+  permission_date: DateTime
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  completion_date: DateTime
+  applicant_uid: String
+  completion_certificate: String
+  construction_permission: String
+  building_plan: String
+  annexure_fourteen: String
+  coast_guard_noc: String
+  fire_noc: String
+  rainwater_harvest: String
+  deviation_plan: String
+  indemnity: String
+  valuation_certificate: String
+  labour_cess: String
+  signature_url: String
+  iagree: Agree
+  status: Status
+}
+
+input UpdateOcInput {
+  userId: Int
+  user_uid: String
+  name: String
+  address: String
+  mobile: String
+  email: String
+  survey_no: String
+  village_id: Int
+  sub_division: String
+  permission_number: String
+  permission_date: DateTime
+  architect_name: String
+  architect_license: String
+  valid_upto: DateTime
+  completion_date: DateTime
+  applicant_uid: String
+  completion_certificate: String
+  construction_permission: String
+  building_plan: String
+  annexure_fourteen: String
+  coast_guard_noc: String
+  fire_noc: String
+  rainwater_harvest: String
+  deviation_plan: String
+  indemnity: String
+  valuation_certificate: String
+  labour_cess: String
+  signature_url: String
+  iagree: Agree
+  status: Status
+  id: Int!
+  remarks: String
+  rejection_reason: String
+  certificate_id: String
+  certificate_date: DateTime
+  certificate_url: String
+  comments_dept: String
+  condition_to_follow: String
+  payment_doc: String
   deletedAt: DateTime
 }

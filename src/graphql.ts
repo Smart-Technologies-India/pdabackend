@@ -88,7 +88,10 @@ export enum FormType {
     DEMOLITION = "DEMOLITION",
     OLDCOPY = "OLDCOPY",
     LANDRECORDS = "LANDRECORDS",
-    UNAUTHORISED = "UNAUTHORISED"
+    UNAUTHORISED = "UNAUTHORISED",
+    CP = "CP",
+    OC = "OC",
+    PLINTH = "PLINTH"
 }
 
 export enum queryStatus {
@@ -679,6 +682,222 @@ export interface UpdatePaymentInput {
     deletedAt?: Nullable<DateTime>;
 }
 
+export interface CreateCpInput {
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name: string;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    applicant_uid?: Nullable<string>;
+    annexure_two?: Nullable<string>;
+    annexure_three?: Nullable<string>;
+    annexure_four?: Nullable<string>;
+    annexure_five?: Nullable<string>;
+    na_copoy?: Nullable<string>;
+    map_copy?: Nullable<string>;
+    nakal_1_14?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    scrutiny_fees?: Nullable<string>;
+    coast_guard_noc?: Nullable<string>;
+    fire_noc?: Nullable<string>;
+    crz_noc?: Nullable<string>;
+    layout_plan?: Nullable<string>;
+    revised_plan?: Nullable<string>;
+    fsi?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+}
+
+export interface UpdateCpInput {
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    applicant_uid?: Nullable<string>;
+    annexure_two?: Nullable<string>;
+    annexure_three?: Nullable<string>;
+    annexure_four?: Nullable<string>;
+    annexure_five?: Nullable<string>;
+    na_copoy?: Nullable<string>;
+    map_copy?: Nullable<string>;
+    nakal_1_14?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    scrutiny_fees?: Nullable<string>;
+    coast_guard_noc?: Nullable<string>;
+    fire_noc?: Nullable<string>;
+    crz_noc?: Nullable<string>;
+    layout_plan?: Nullable<string>;
+    revised_plan?: Nullable<string>;
+    fsi?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+    id: number;
+    remarks?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface CreatePlinthInput {
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name: string;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    permission_number?: Nullable<string>;
+    permission_date?: Nullable<DateTime>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    architect_address?: Nullable<string>;
+    applicant_uid?: Nullable<string>;
+    annexure_eleven?: Nullable<string>;
+    copy_construcation_license?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    architect_signature?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+}
+
+export interface UpdatePlinthInput {
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    permission_number?: Nullable<string>;
+    permission_date?: Nullable<DateTime>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    architect_address?: Nullable<string>;
+    applicant_uid?: Nullable<string>;
+    annexure_eleven?: Nullable<string>;
+    copy_construcation_license?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    architect_signature?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+    id: number;
+    remarks?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface CreateOcInput {
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name: string;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    permission_number?: Nullable<string>;
+    permission_date?: Nullable<DateTime>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    completion_date?: Nullable<DateTime>;
+    applicant_uid?: Nullable<string>;
+    completion_certificate?: Nullable<string>;
+    construction_permission?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    annexure_fourteen?: Nullable<string>;
+    coast_guard_noc?: Nullable<string>;
+    fire_noc?: Nullable<string>;
+    rainwater_harvest?: Nullable<string>;
+    deviation_plan?: Nullable<string>;
+    indemnity?: Nullable<string>;
+    valuation_certificate?: Nullable<string>;
+    labour_cess?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+}
+
+export interface UpdateOcInput {
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    permission_number?: Nullable<string>;
+    permission_date?: Nullable<DateTime>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    completion_date?: Nullable<DateTime>;
+    applicant_uid?: Nullable<string>;
+    completion_certificate?: Nullable<string>;
+    construction_permission?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    annexure_fourteen?: Nullable<string>;
+    coast_guard_noc?: Nullable<string>;
+    fire_noc?: Nullable<string>;
+    rainwater_harvest?: Nullable<string>;
+    deviation_plan?: Nullable<string>;
+    indemnity?: Nullable<string>;
+    valuation_certificate?: Nullable<string>;
+    labour_cess?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+    id: number;
+    remarks?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface Rti {
     id: number;
     userId: number;
@@ -1037,6 +1256,135 @@ export interface Payment {
     deletedAt?: Nullable<DateTime>;
 }
 
+export interface Cp {
+    id: number;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    applicant_uid?: Nullable<string>;
+    annexure_two?: Nullable<string>;
+    annexure_three?: Nullable<string>;
+    annexure_four?: Nullable<string>;
+    annexure_five?: Nullable<string>;
+    na_copoy?: Nullable<string>;
+    map_copy?: Nullable<string>;
+    nakal_1_14?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    scrutiny_fees?: Nullable<string>;
+    coast_guard_noc?: Nullable<string>;
+    fire_noc?: Nullable<string>;
+    crz_noc?: Nullable<string>;
+    layout_plan?: Nullable<string>;
+    revised_plan?: Nullable<string>;
+    fsi?: Nullable<string>;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface Plinth {
+    id: number;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name?: Nullable<string>;
+    address?: Nullable<string>;
+    mobile?: Nullable<string>;
+    email?: Nullable<string>;
+    survey_no?: Nullable<string>;
+    village_id?: Nullable<number>;
+    sub_division?: Nullable<string>;
+    permission_number?: Nullable<string>;
+    permission_date?: Nullable<DateTime>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    architect_address?: Nullable<string>;
+    applicant_uid?: Nullable<string>;
+    annexure_eleven?: Nullable<string>;
+    copy_construcation_license?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    architect_signature?: Nullable<string>;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
+export interface Oc {
+    id: number;
+    userId?: Nullable<number>;
+    user_uid?: Nullable<string>;
+    name: string;
+    address: string;
+    mobile: string;
+    email?: Nullable<string>;
+    survey_no: string;
+    village_id: number;
+    sub_division: string;
+    permission_number?: Nullable<string>;
+    permission_date?: Nullable<DateTime>;
+    architect_name?: Nullable<string>;
+    architect_license?: Nullable<string>;
+    valid_upto?: Nullable<DateTime>;
+    completion_date?: Nullable<DateTime>;
+    applicant_uid?: Nullable<string>;
+    completion_certificate?: Nullable<string>;
+    construction_permission?: Nullable<string>;
+    building_plan?: Nullable<string>;
+    annexure_fourteen?: Nullable<string>;
+    coast_guard_noc?: Nullable<string>;
+    fire_noc?: Nullable<string>;
+    rainwater_harvest?: Nullable<string>;
+    deviation_plan?: Nullable<string>;
+    indemnity?: Nullable<string>;
+    valuation_certificate?: Nullable<string>;
+    labour_cess?: Nullable<string>;
+    remarks?: Nullable<string>;
+    signature_url?: Nullable<string>;
+    rejection_reason?: Nullable<string>;
+    certificate_id?: Nullable<string>;
+    certificate_date?: Nullable<DateTime>;
+    certificate_url?: Nullable<string>;
+    comments_dept?: Nullable<string>;
+    condition_to_follow?: Nullable<string>;
+    payment_doc?: Nullable<string>;
+    iagree?: Nullable<Agree>;
+    status?: Nullable<Status>;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: Nullable<DateTime>;
+}
+
 export interface IQuery {
     getAllRti(): Rti[] | Promise<Rti[]>;
     getAllRtiById(id: number): Rti | Promise<Rti>;
@@ -1080,6 +1428,12 @@ export interface IQuery {
     getAllPayment(): Payment[] | Promise<Payment[]>;
     getAllPaymentById(id: number): Payment | Promise<Payment>;
     searchPayment(searchPaymentInput: SearchPaymentInput): Payment[] | Promise<Payment[]>;
+    getAllCp(): Cp[] | Promise<Cp[]>;
+    getCpById(id: number): Cp | Promise<Cp>;
+    getAllPlinth(): Plinth[] | Promise<Plinth[]>;
+    getPlinthById(id: number): Plinth | Promise<Plinth>;
+    getAllOc(): Oc[] | Promise<Oc[]>;
+    getOcById(id: number): Oc | Promise<Oc>;
 }
 
 export interface IMutation {
@@ -1114,6 +1468,15 @@ export interface IMutation {
     createPayment(createPaymentInput: CreatePaymentInput): Payment | Promise<Payment>;
     updatePaymentById(updatePaymentInput: UpdatePaymentInput): Payment | Promise<Payment>;
     deletePaymentById(updatePaymentInput: UpdatePaymentInput): Payment | Promise<Payment>;
+    createCp(createCpInput: CreateCpInput): Cp | Promise<Cp>;
+    updateCpById(updateCpInput: UpdateCpInput): Cp | Promise<Cp>;
+    deleteCpById(updateCpInput: UpdateCpInput): Cp | Promise<Cp>;
+    createPlinth(createPlinthInput: CreatePlinthInput): Plinth | Promise<Plinth>;
+    updatePlinthById(updatePlinthInput: UpdatePlinthInput): Plinth | Promise<Plinth>;
+    deletePlinthById(updatePlinthInput: UpdatePlinthInput): Plinth | Promise<Plinth>;
+    createOc(createOcInput: CreateOcInput): Oc | Promise<Oc>;
+    updateOcById(updateOcInput: UpdateOcInput): Oc | Promise<Oc>;
+    deleteOcById(updateOcInput: UpdateOcInput): Oc | Promise<Oc>;
 }
 
 export type DateTime = any;
