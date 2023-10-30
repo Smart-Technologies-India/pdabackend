@@ -172,6 +172,9 @@ export class CommonService {
       'LANDRECORDS',
       'MAMLATDAR',
       'DEMOLITION',
+      'OC',
+      'CP',
+      'PLINTH'
     ];
 
     const count = await this.prisma.common.groupBy({
@@ -285,6 +288,9 @@ export class CommonService {
       'LANDRECORDS',
       'MAMLATDAR',
       'DEMOLITION',
+      'OC',
+      'CP',
+      'PLINTH'
     ];
 
     const queryStatus = [
@@ -340,6 +346,9 @@ export class CommonService {
       'LANDRECORDS',
       'MAMLATDAR',
       'DEMOLITION',
+      'OC',
+      'CP',
+      'PLINTH'
     ];
 
     const village = await this.prisma.village.findMany({

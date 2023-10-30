@@ -26,4 +26,13 @@ export class FileCount {
 
   @Field(() => Int)
   DEMOLITION: number;
+
+  @Field(() => Int)
+  OC: number;
+
+  @Field(() => Int)
+  CP: number;
+
+  @Field(() => Int)
+  PLINTH: number;
 }

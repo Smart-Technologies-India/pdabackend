@@ -35,4 +35,13 @@ export class FileProgress {
 
   @Field(() => FileProgressDetails)
   DEMOLITION: FileProgressDetails;
+
+  @Field(() => FileProgressDetails)
+  OC: FileProgressDetails;
+
+  @Field(() => FileProgressDetails)
+  CP: FileProgressDetails;
+
+  @Field(() => FileProgressDetails)
+  PLINTH: FileProgressDetails;
 }
